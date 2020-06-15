@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://example.org/</loc>
+    <lastmod>2020-06-12T17:21:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/blog/</loc>
+    <lastmod>2020-06-12T17:21:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/cern/</loc>
+    <lastmod>2020-06-12T17:21:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/blog/cern/analysischain/</loc>
+    <lastmod>2020-06-12T17:21:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/</loc>
+    <lastmod>2020-06-12T17:21:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/tags/root/</loc>
+    <lastmod>2019-06-13T09:02:03+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/blog/cern/root/</loc>
+    <lastmod>2019-06-13T09:02:03+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/categories/</loc>
+  </url>
+  
+</urlset>
