@@ -49,7 +49,7 @@
       "datePublished": "2020-06-12 17:21:44 \u002b0200 CEST",
       "dateModified" : "2020-06-12 17:21:44 \u002b0200 CEST",
       "url" : "http:\/\/example.org\/blog\/cern\/analysischain\/",
-      "wordCount" : "3362",
+      "wordCount" : "3363",
       "keywords" : ["Blog"]
     }
   
@@ -93,8 +93,9 @@
       >Jun 12 2020</time
     >
   </header>
-  <article class="post__content">
-    
+  <div class="article-w-ToC">
+    <article class="post__content">
+      
 <p class="warning"> This article was originally within a longer text dedicated to ROOT, hence the references to it.</br></br>
 I wrote this a while ago and some numbers, for instance the amount of data processed, might be outdated.
 </p>
@@ -414,12 +415,13 @@ improvement in and reduction of the cost of network links, and now it is
 possible, for instance, to transfer data between centers of the same
 tier or to build a set of fast network hubs connecting many Tier-2 to
 many Tier-1 and Tier-0.</p>
+<!-- 
 <p>
     <div style="position: relative; padding-bottom: 56.25%;overflow: hidden;">
         <iframe src="https://www.youtube.com/embed/wZcaX11rYRE" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="WLCG Animation"></iframe>
     </div>
     <em><strong>Figure 1</strong>: Animation showing the WLCG tiers location (2014). Note that the Tier-0 center Wigner is now permanently closed.</em> <a href="https://videos.cern.ch/record/1748359">CERN</a>
-</p>
+</p> -->
 <p>The WLCG is a fundamental infrastructure for the HEP community and has
 been a core concept for the processing of the analysis chain during the
 last decade. Proof of that is that the computing model of the LHC
@@ -459,8 +461,27 @@ resources.</p>
 </section>
 
 
-    
-  </article>
+      
+    </article>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-the-lhc-chain">1. The LHC chain</a>
+      <ul>
+        <li><a href="#12-main-detectors-in-the-lhc">1.2 Main detectors in the LHC</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-the-analysis-chain">2. The Analysis chain</a>
+      <ul>
+        <li><a href="#21-data-acquisition">2.1 Data acquisition</a></li>
+        <li><a href="#22-reconstruction-of-physics-objects-from-data">2.2 Reconstruction of physics objects from data</a></li>
+        <li><a href="#23-monte-carlo-generation">2.3 Monte Carlo generation</a></li>
+        <li><a href="#24-physics-analysis">2.4 Physics analysis</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-computing-infrastructure-at-cern">3. Computing infrastructure at CERN</a></li>
+  </ul>
+</nav>
+  </div>
   
 
 <ul class="tags__list">
@@ -469,7 +490,7 @@ resources.</p>
         <a class="tag__link" href="http://example.org/tags/cern/">cern</a>
     </li></ul>
 
- <div class="pagination">
+  <div class="pagination">
   
     <a class="pagination__item" href="http://example.org/blog/cern/root/">
         <span class="pagination__label">Previous Post</span>
@@ -489,9 +510,6 @@ resources.</p>
   <div class="social-icons">
   
   
-  
-  <a class="social-icons__icon social-icons__icon--linkedin" href="https://www.linkedin.com/in/xaviervallspla"></a>
-  
 </div>
 
   <p></p>
@@ -500,6 +518,7 @@ resources.</p>
 
   <script src="/js/index.js"></script>
   
+<script src="/js/table-of-contents.js"></script>
 <script src="/vendor/prism/prism.js"></script>
 
 </body>

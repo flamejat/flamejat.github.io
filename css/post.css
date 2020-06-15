@@ -606,9 +606,9 @@ pre[class*="language-"] {
 
 .post {
   width: 100%;
-  text-align: justify;
-  max-width: 34rem;
+  max-width: 50rem;
   margin: 0 auto;
+  text-align: justify;
 }
 
 .post h2,
@@ -647,6 +647,10 @@ pre[class*="language-"] {
   max-width: 500px;
   margin: 0 auto;
   display: block
+}
+
+.post__content{
+  max-width: 34rem;
 }
 
 .post__content a {
@@ -709,6 +713,7 @@ pre[class*="language-"] {
 }
 
 .tags__list {
+  max-width: 34rem;
   padding-right: 1.5rem;
   margin: 1.5rem 0 0;
   list-style: none;
@@ -717,7 +722,7 @@ pre[class*="language-"] {
   display: flex;
   -webkit-box-pack: end;
   -ms-flex-pack: end;
-  justify-content: flex-end
+  justify-content: flex-start
 }
 
 .tag__item {
@@ -867,4 +872,48 @@ footer p {
 
 .newsletter__buttondown-link {
   display: none
+}
+
+
+.article-w-ToC {
+  display:flex;
+  flex-direction: row;
+}
+
+#TableOfContents {
+  position: sticky; 
+  align-self: start;
+  margin-left: 4rem;
+  white-space: nowrap;
+  top: 4rem;
+}
+
+#TableOfContents ul {
+  list-style: none;
+}
+
+#TableOfContents ul li a{
+  text-decoration: none;
+  color: #9b9b9b;
+}
+
+#TableOfContents ul li a.active{
+  text-decoration: none;
+  font-weight: 500;
+  color: rgb(51, 51, 51);
+  /* font-size: .9rem; */
+}
+
+@media screen and (max-width:800px) {
+  #TableOfContents {
+    visibility: hidden;
+    width: 0;
+    margin:0;
+  }
+  .post {
+    max-width: 34rem;
+  }
+  .article-w-ToC {
+    flex-direction: column;
+  }
 }
