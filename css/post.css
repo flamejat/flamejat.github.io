@@ -24,6 +24,7 @@ html {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
 }
 
 *,
@@ -607,9 +608,9 @@ pre[class*="language-"] {
 
 .post {
   width: 100%;
+  text-align: justify;
   max-width: 50rem;
   margin: 0 auto;
-  text-align: justify;
 }
 
 .post h2,
@@ -650,8 +651,8 @@ pre[class*="language-"] {
   display: block
 }
 
-.post__content{
-  max-width: 34rem;
+.post__content {
+  max-width: 40rem;
 }
 
 .post__content a {
@@ -723,7 +724,6 @@ pre[class*="language-"] {
   display: flex;
   -webkit-box-pack: end;
   -ms-flex-pack: end;
-  justify-content: flex-start
 }
 
 .tag__item {
@@ -875,14 +875,13 @@ footer p {
   display: none
 }
 
-
 .article-w-ToC {
-  display:flex;
+  display: flex;
   flex-direction: row;
 }
 
 #TableOfContents {
-  position: sticky; 
+  position: sticky;
   align-self: start;
   margin-left: 4rem;
   white-space: nowrap;
@@ -893,23 +892,22 @@ footer p {
   list-style: none;
 }
 
-#TableOfContents ul li a{
+#TableOfContents a {
   text-decoration: none;
   color: #9b9b9b;
 }
 
-#TableOfContents ul li a.active{
+#TableOfContents a.active {
   text-decoration: none;
   font-weight: 500;
   color: rgb(51, 51, 51);
-  /* font-size: .9rem; */
 }
 
 @media screen and (max-width:800px) {
   #TableOfContents {
     visibility: hidden;
     width: 0;
-    margin:0;
+    margin: 0;
   }
   .post {
     max-width: 34rem;

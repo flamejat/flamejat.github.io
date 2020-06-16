@@ -28,16 +28,6 @@
   </url>
   
   <url>
-    <loc>http://example.org/tags/root/</loc>
-    <lastmod>2019-06-13T09:02:03+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://example.org/blog/cern/root/</loc>
-    <lastmod>2019-06-13T09:02:03+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://example.org/categories/</loc>
   </url>
   

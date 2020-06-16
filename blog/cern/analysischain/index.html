@@ -20,7 +20,8 @@
 
   <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
   
-<link rel="stylesheet" href="/css/post.css" /> 
+<link rel="stylesheet" href="/css/post.css" />
+<link rel="stylesheet" href="/css/syntax.css" />
 
    
    
@@ -88,7 +89,7 @@
     
 <div class="post">
   <header class="post__header">
-    <h1 class="post__title">Physics analysis in the LHC era</h1>
+    <h1 id="post__title">Physics analysis in the LHC era</h1>
     <time datetime="2020-06-12 17:21:44 &#43;0200 CEST" class="post__date"
       >Jun 12 2020</time
     >
@@ -96,7 +97,7 @@
   <div class="article-w-ToC">
     <article class="post__content">
       
-<p class="warning"> This article was originally within a longer text dedicated to ROOT, hence the references to it.</br></br>
+<p class="warning"> This article was originally within <a href="http://hdl.handle.net/10803/663536"> a longer text dedicated to ROOT</a>, hence the references to it.</br></br>
 I wrote this a while ago and some numbers, for instance the amount of data processed, might be outdated.
 </p>
 <p>The LHC is a circular particle accelerator located at the European Organization for Nuclear Research (CERN) and one of the most sophisticated machines ever built by humanity. In order to recreate conditions similar to those just after the Big Bang, the LHC circulates a beam of charged particles over its 27 km of circumference, increasing their momentum until they reach the appropriate energy, and then collides them at one of the 4 particle detectors in its ring: A Large Ion Collider Experiment (ALICE), A Toroidal LHC Apparatus (ATLAS), Compact Muon Solenoid (CMS) and Large Hadron Collider beauty (LHCb).</p>
@@ -463,22 +464,26 @@ resources.</p>
 
       
     </article>
-    <nav id="TableOfContents">
+      <nav id="TableOfContents">
   <ul>
-    <li><a href="#1-the-lhc-chain">1. The LHC chain</a>
+    <li>
       <ul>
-        <li><a href="#12-main-detectors-in-the-lhc">1.2 Main detectors in the LHC</a></li>
+        <li><a href="#1-the-lhc-chain">1. The LHC chain</a>
+          <ul>
+            <li><a href="#12-main-detectors-in-the-lhc">1.2 Main detectors in the LHC</a></li>
+          </ul>
+        </li>
+        <li><a href="#2-the-analysis-chain">2. The Analysis chain</a>
+          <ul>
+            <li><a href="#21-data-acquisition">2.1 Data acquisition</a></li>
+            <li><a href="#22-reconstruction-of-physics-objects-from-data">2.2 Reconstruction of physics objects from data</a></li>
+            <li><a href="#23-monte-carlo-generation">2.3 Monte Carlo generation</a></li>
+            <li><a href="#24-physics-analysis">2.4 Physics analysis</a></li>
+          </ul>
+        </li>
+        <li><a href="#3-computing-infrastructure-at-cern">3. Computing infrastructure at CERN</a></li>
       </ul>
     </li>
-    <li><a href="#2-the-analysis-chain">2. The Analysis chain</a>
-      <ul>
-        <li><a href="#21-data-acquisition">2.1 Data acquisition</a></li>
-        <li><a href="#22-reconstruction-of-physics-objects-from-data">2.2 Reconstruction of physics objects from data</a></li>
-        <li><a href="#23-monte-carlo-generation">2.3 Monte Carlo generation</a></li>
-        <li><a href="#24-physics-analysis">2.4 Physics analysis</a></li>
-      </ul>
-    </li>
-    <li><a href="#3-computing-infrastructure-at-cern">3. Computing infrastructure at CERN</a></li>
   </ul>
 </nav>
   </div>
@@ -492,11 +497,6 @@ resources.</p>
 
   <div class="pagination">
   
-    <a class="pagination__item" href="http://example.org/blog/cern/root/">
-        <span class="pagination__label">Previous Post</span>
-        <span class="pagination__title">ROOT</span>
-    </a>
-  
 
   
 </div>
@@ -509,6 +509,9 @@ resources.</p>
 <footer>
   <div class="social-icons">
   
+  
+  
+  <a class="social-icons__icon social-icons__icon--linkedin" href="https://www.linkedin.com/in/xaviervallspla"></a>
   
 </div>
 

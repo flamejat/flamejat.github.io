@@ -368,6 +368,9 @@ main {
   background-image: url("/icons/github.svg")
 }
 
+.social-icons__icon--linkedin {
+  background-image: url("/icons/linkedin.svg")
+}
 .splash-container {
   height: 100%;
   display: -webkit-box;
