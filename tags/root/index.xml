@@ -17,7 +17,8 @@
       <pubDate>Thu, 13 Jun 2019 09:02:03 +0200</pubDate>
       
       <guid>http://example.org/blog/cern/root/</guid>
-      <description>ROOT 1 is an open-source, cross-platform, object-oriented C++ framework for data analysis, conceived for the practice of HEP. Starting as a private project by Rene Brun and Fons Rademakers, ROOT has been at the heart of most HEP analyses during more than two decades, in continuous development and improvement, being in constant communication with the community, obtaining invaluable feedback, providing great toolkit support, and evolving the product according to the needs of its userbase.</description>
+      <description>This article is part of a series that I&#39;m slowly publishing, and it still has several broken links referencing unpublished articles.
+ROOT1 is an open-source, cross-platform, object-oriented C++ framework for data analysis, conceived for the practice of High Energy Physics (HEP). Starting as a private project by Rene Brun and Fons Rademakers, ROOT has been at the heart of most HEP analyses during more than two decades, in continuous development and improvement, being in constant communication with the community, obtaining invaluable feedback, providing great toolkit support, and evolving the product according to the needs of its userbase.</description>
     </item>
     
   </channel>

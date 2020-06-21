@@ -1,0 +1,24 @@
+html {
+    scroll-behavior: smooth;
+}
+.post__container {
+    text-align: justify;
+    max-width: 65rem;
+}
+
+.post figure {
+    margin: 2.5rem
+}
+
+.post {
+    max-width: 40rem;
+}
+
+.footnotes {
+    margin-top: 2.5rem;
+    font-size: medium;
+}
+
+#grid-gallery figure{
+    margin:0;
+}

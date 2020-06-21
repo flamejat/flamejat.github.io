@@ -20,5 +20,14 @@
       <description></description>
     </item>
     
+    <item>
+      <title>ROOT</title>
+      <link>http://example.org/tags/root/</link>
+      <pubDate>Thu, 13 Jun 2019 09:02:03 +0200</pubDate>
+      
+      <guid>http://example.org/tags/root/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>
