@@ -6,10 +6,20 @@
     <description>Recent content on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 Jun 2020 17:21:44 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 21 Jun 2020 09:12:19 +0200</lastBuildDate>
     
 	<atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Automatization of Techlab&#39;s Request Management Process</title>
+      <link>http://example.org/blog/cern/rms/</link>
+      <pubDate>Sun, 21 Jun 2020 09:12:19 +0200</pubDate>
+      
+      <guid>http://example.org/blog/cern/rms/</guid>
+      <description>Warning   This is an old post, Techlab was an interesting project that, unfortunately, no longer exist.
+  Background on Techlab, from the website   Techlab is a CERN IT project providing testing/benchmarking platforms for multiple architectures and accelerators. We gather users requests, analyze market trends and procure cutting edge hardware. We then set it up, test it and put it up for experimental use by members of the HEP community.</description>
+    </item>
     
     <item>
       <title>Physics analysis in the LHC era</title>
@@ -27,7 +37,16 @@
       
       <guid>http://example.org/blog/cern/root/</guid>
       <description>This article is part of a series that I&#39;m slowly publishing, and it still has several broken links referencing unpublished articles.
-ROOT1 is an open-source, cross-platform, object-oriented C++ framework for data analysis, conceived for the practice of High Energy Physics (HEP). Starting as a private project by Rene Brun and Fons Rademakers, ROOT has been at the heart of most HEP analyses during more than two decades, in continuous development and improvement, being in constant communication with the community, obtaining invaluable feedback, providing great toolkit support, and evolving the product according to the needs of its userbase.</description>
+ ROOT1 is an open-source, cross-platform, object-oriented C++ framework for data analysis, conceived for the practice of High Energy Physics (HEP). Starting as a private project by Rene Brun and Fons Rademakers, ROOT has been at the heart of most HEP analyses during more than two decades, in continuous development and improvement, being in constant communication with the community, obtaining invaluable feedback, providing great toolkit support, and evolving the product according to the needs of its userbase.</description>
+    </item>
+    
+    <item>
+      <title>Improving configuration and monitoring of Nvidia GPU servers at CERN.</title>
+      <link>http://example.org/blog/cern/cuda/</link>
+      <pubDate>Thu, 21 Mar 2019 09:12:26 +0200</pubDate>
+      
+      <guid>http://example.org/blog/cern/cuda/</guid>
+      <description>One of Techlab&amp;rsquo;s main activities, arguably the most popular one, is the provisioning of GPU resources. In addition to user support, this process involves the complete configuration, administration, lifetime management and maintenance of the systems. Due to the high demand, turnover rate and variety of configurations according to user needs, the existence of an efficient and effective system to handle the configuration and monitoring of GPU resources is fundamental in order to minimize the time cost and to anticipate and investigate potential problems or performance concerns.</description>
     </item>
     
   </channel>

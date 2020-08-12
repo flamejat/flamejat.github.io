@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <title>Improving configuration and monitoring of Nvidia GPU servers at CERN. | My New Hugo Site</title>
+
+  <meta charset="UTF-8">
+  <meta name="language" content="en">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  
+  
+
+  <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+
+  
+  
+    
+ 
+  
+  
+  
+  
+  
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/post.min.423aef0742dab2335ffc1d5a5b0232425b83fbb8ff30ab07fa55524587262ef4.css" integrity="sha256-QjrvB0LasjNf/B1aWwIyQluD&#43;7j/MKsH&#43;lVSRYcmLvQ="/>
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/custom.min.e82b10a78547c055d0865dc60c44d991716134ea551429c086ee814d26150ee1.css" integrity="sha256-6CsQp4VHwFXQhl3GDETZkXFhNOpVFCnAhu6BTSYVDuE="/>
+  
+  
+   
+   
+    
+
+<script type="application/ld+json">
+  
+    {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/"
+      },
+      "articleSection" : "blog",
+      "name" : "Improving configuration and monitoring of Nvidia GPU servers at CERN.",
+      "headline" : "Improving configuration and monitoring of Nvidia GPU servers at CERN.",
+      "description" : "",
+      "inLanguage" : "en-US",
+      "author" : "",
+      "creator" : "",
+      "publisher": "",
+      "accountablePerson" : "",
+      "copyrightHolder" : "",
+      "copyrightYear" : "2019",
+      "datePublished": "2019-03-21 09:12:26 \u002b0200 \u002b0200",
+      "dateModified" : "2019-03-21 09:12:26 \u002b0200 \u002b0200",
+      "url" : "http:\/\/example.org\/blog\/cern\/cuda\/",
+      "wordCount" : "1233",
+      "keywords" : ["Blog"]
+    }
+  
+  </script>
+</head>
+
+<body>
+  <div class="burger__container">
+  <div class="burger" aria-controls="navigation" aria-label="Menu">
+    <div class="burger__meat burger__meat--1"></div>
+    <div class="burger__meat burger__meat--2"></div>
+    <div class="burger__meat burger__meat--3"></div>
+  </div>
+</div>
+ 
+
+  <nav class="nav" id="navigation">
+  <ul class="nav__list">
+    
+    
+      <li>
+        <a  href="/">about</a>
+      </li>
+    
+      <li>
+        <a  class="active"
+         href="/blog">blog</a>
+      </li>
+    
+  </ul>
+</nav>
+
+
+  <main>
+    
+    
+
+    <div class="flex-wrapper">
+      <div class="post__container">
+        <div class="post">
+          <header class="post__header">
+            <h1 id="post__title">Improving configuration and monitoring of Nvidia GPU servers at CERN.</h1>
+            <time datetime="2019-03-21 09:12:26 &#43;0200 &#43;0200" class="post__date">Mar 21 2019</time> 
+          </header>
+          <article class="post__content">
+              
+<p>One of Techlab&rsquo;s main activities, arguably the most popular one, is the provisioning of GPU resources. In addition to user support, this process involves the complete configuration, administration, lifetime management and maintenance of the systems. Due to the high demand, turnover rate and variety of configurations according to user needs, the existence of an efficient and effective system to handle the configuration and monitoring of GPU resources is fundamental in order to minimize the time cost and to anticipate and investigate potential problems or performance concerns.</p>
+<p>We introduce an improved framework for the management of GPU resources at CERN, improving on the current Techlab processes by moving from developing and maintaining in-house solutions to exploiting organization-standard tools and frameworks in a way more cohesive and integrated with CERN&rsquo;s cloud configuration and monitoring infrastructure.</p>
+<p>First we introduce a new module for Puppet for the deployment of CUDA libraries on Nvidia GPU systems. Then, we describe the software developed for the collection of GPU metrics and the necessary steps to set up a dashboard for these metrics, capitalizing on CERN&rsquo;s monitoring infrastructure.</p>
+<h2 id="improving-the-deployment-of-cuda-libraries-with-puppet">Improving the deployment of CUDA libraries with Puppet<a class="anchor" href="#improving-the-deployment-of-cuda-libraries-with-puppet">#</a></h2>
+<p>We can divide Techlab&rsquo;s GPU offer into Nvidia and AMD GPUs. This document will only refer to the configuration of Nvidia GPUs. Within Techlab&rsquo;s Nvidia GPU offer, we make the distinction between GPU servers and GPU Virtual Machines (VM). Beyond the obvious physical versus virtual differences, this distinction has implications in terms of power, access policy and lifetime management.</p>
+<p>GPU servers&rsquo; GPU models are considerably more powerful than GPU VMs, and they are lent on a shared access policy, where users from different projects share the resources. In contrast, GPU VMs are provided on an exclusive access policy, where each VM is guaranteed to provide access to users associated to a single request or project. Furthermore, servers require configuration changes on the GPU side only for update or troubleshooting operations, while the lifetime management of a GPU VM takes a radically different approach, providing users with a new VM for each new request and destroying the VM at the end of the loan period.</p>
+<p>The current GPU configuration implies a tedious manual process of installation and redistribution of software, requiring a new download of the binaries and its deployment on every node for each update of the software. This is specially costly taking into account the high turnover rate of GPU VMs and their particular lifetime management.</p>
+<p>We rethink the configuration process by rewriting it into CERN&rsquo;s automation framework, Puppet, first developed and tested extending Techlab&rsquo;s hostgroup (node cluster) configuration files and then factored out into a Puppet module.</p>
+<p>Puppet modules act as reusable and shareable building blocks for the Puppet configuration, each managing a specific task in the infrastructure. Factoring out our CUDA configuration code into a Puppet module allows for the reuse of the code by other teams of the organization, such as the cloud team and CMS&rsquo;s Patatrack team.</p>
+<p>The CUDA Puppet module has two responsabilities: installing the CUDA repository and installing the specified version of the CUDA libraries with the NVidia proprietary drivers. In addition, and because Nvidia broke its naming conventions for the CUDA libraries in version 10.1, several softlinks are created for applications that require by default the libraries to follow previous naming conventions, such as TensorFlow. The module&rsquo;s code can be inspected on the following gitlab repository: <a href="https://gitlab.cern.ch/ai/it-puppet-module-cuda/tree/master/code">https://gitlab.cern.ch/ai/it-puppet-module-cuda/tree/master/code</a></p>
+<p>To load the puppet module within CERN&rsquo;s Puppet managed infrastructure and apply the puppet configuration, the following lines should be added to the node or hostgroup manifest:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-puppet" data-lang="puppet"><span style="color:#ff79c6">class</span> {<span style="color:#f1fa8c">&#39;::cuda&#39;</span>:
+  <span style="color:#50fa7b">version</span>           <span style="color:#ff79c6">=&gt;</span> <span style="color:#8be9fd;font-style:italic">$cuda_version,</span>
+  <span style="color:#50fa7b">install_libraries</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#8be9fd;font-style:italic">$install,</span>
+}
+</code></pre></div><p>where <code>$install</code> is a boolean flag signaling if the libraries will be installed in addition to the repository, defaulting to true, and <code>$cuda_version</code> is a real number specifying the CUDA version to install, from 9.0 onwards. In case of not specifying a version value, we default to the latest version available.</p>
+<h2 id="monitoring-gpu-metrics-with-collectd-and-grafana">Monitoring GPU metrics with collectd and Grafana<a class="anchor" href="#monitoring-gpu-metrics-with-collectd-and-grafana">#</a></h2>
+<p>In order to better evaluate the usage, performance and potential issues related to the GPU devices, we deploy monitoring tools on Techlab nodes that extract metrics and indicators from the GPUs in a recurring way and generate their time series visualization for further inspection.</p>
+<p>Techlab&rsquo;s previous monitoring solution consisted of a daemonized python process gathering GPU metrics every 5 minutes and generating time series plots using matplotlib. This system, deployed to each gpu node with Puppet at configuration time, presented several disadvantages. Both data and graphics were stored locally, comsuming disk space over time and available to users with root access, a frequent case in GPU VMs. The monitoring code was deployed with the installation code, and was rather limited in terms of metrics displayed. Finally, opening separate graphics files for each metric was not the most convenient workflow, and was intended more for troubleshooting and post-mortem analyses than for continuous monitoring.</p>
+<p>Instead, here we introduce a new, less complex and more streamlined approach to the GPU monitoring process, taking advantage of CERN&rsquo;s monitoring infrastructure (Figure 1) to visualize several performance metrics and indicators from Techlab&rsquo;s GPUs. Particularly, we exploit the workflow leveraging collectd for the extraction of metrics and grafana for its visualization. We first introduce the collectd plugin developed for GPU data collection and its possible configurations, and then we describe the process of visualizing these metrics in grafana, illustrating several dashboard examples.</p>
+<figure>
+    <img src="/media/CUDA/monit-architecture.png"
+         alt="Monitoring@CERN"/> <figcaption>
+            <p><em><strong>Figure 1</strong>:  Monitoring service architecture at CERN.</em>
+                    <a href="https://monitdocs.web.cern.ch/monitdocs/overview/architecture.html">CERN IT Monitoring docs</a></p>
+        </figcaption>
+</figure>
+
+<h3 id="a-cuda-monitoring-plugin-for-collectd">A CUDA monitoring plugin for collectd<a class="anchor" href="#a-cuda-monitoring-plugin-for-collectd">#</a></h3>
+<p>Collectd is a Unix daemon that collects, transfers and stores performance data of computers and network equipment. At CERN, collectd is the standard tool used to extract metrics and alarms from the nodes and publish them into the data monitoring pipelines for future analysis and monitoring.</p>
+<p>We contribute the collection of GPU performance and error metrics to CERN&rsquo;s collectd and monitoing infrastructure, by developing a collectd plugin that exploits the Nvidia system monitoring interface (nvidia-smi) to extract these metrics from the GPUs. Several versions of collectd-cuda can be found online, including an official one. After a preliminary analysis they were deemed either not complete and configurable enough, or in a stalled development status. We took the decision to develop a new version, adapted to our needs, and then initiate discussions to contribute our developments to the official cuda-collectd plugin.</p>
+<p>In addition to defining the collection interval, we can configure the plugin attending to three metrics collection blocks:</p>
+<ul>
+<li>Basic: set of performance metrics, such as temperature and percentage of usage, and baselines, such as enforced power limit and power limit, relevant for any workflow.</li>
+<li>Graphics: graphics collected metrics, relevant only in graphic operations.</li>
+<li>ECC errors: error correcting memory metrics, relevant to profile memory errors during execution.</li>
+</ul>
+<p>where the basic collection block is always collected and the graphics and errors collection blocks are boolean flags that are not activated by default.</p>
+<p>In systems with Security-Enhanced Linux (SELinux), the collectd processes execute within the very restrictive collectd_t Security-Enhanced Linux (SELinux) domain. Any access to a different domain or type from within the collectd SELinux context is denied if not explicitly allowed by a policy rule. For this reason, we implement and provide the set of SELinux policy rules to allow the collectd process access the resources required by the <code>nvidia-smi</code>execution.</p>
+<p>The code for the <a href="https://gitlab.cern.ch/techlab-project/collectd-cuda/">CUDA plugin</a> and the associated <a href="https://gitlab.cern.ch/techlab-project/selinux-policy-targeted-collectd-cuda">SeLinux targeted policy package</a> can be found on <a href="https://gitlab.cern.ch/techlab-project">Techlab&rsquo;s gitlab profile</a>.</p>
+<h3 id="monitoring-gpu-metrics-on-grafana">Monitoring GPU metrics on Grafana<a class="anchor" href="#monitoring-gpu-metrics-on-grafana">#</a></h3>
+<p>In construction&hellip;</p>
+<!-- Figure out why collectd needs a selinux package
+
+take screenshots
+
+
+
+
+###### Techlab monitoring
+###### Batch team monitoring
+
+
+# Deployment
+
+CMS, Batch, Techlab --><blockquote>
+</blockquote>
+
+
+              
+          </article>
+          
+
+ <div class="pagination">
+  
+
+  
+    <a class="pagination__item" href="http://example.org/blog/cern/root/">
+      <span class="pagination__label">Next Post</span>
+      <span class="pagination__title" >ROOT</a>
+    </a>
+  
+</div>
+
+          
+          <footer class="post__footer">
+            <div class="social-icons">
+    
+    
+    
+    <a class="social-icons__icon social-icons__icon--linkedin"
+        href="https://www.linkedin.com/in/xaviervallspla"></a>
+    
+</div>
+            <p></p>
+          </footer>
+          </div>
+      </div>
+      
+      <div class="toc-container">
+          
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#improving-the-deployment-of-cuda-libraries-with-puppet">Improving the deployment of CUDA libraries with Puppet</a></li>
+        <li><a href="#monitoring-gpu-metrics-with-collectd-and-grafana">Monitoring GPU metrics with collectd and Grafana</a>
+          <ul>
+            <li><a href="#a-cuda-monitoring-plugin-for-collectd">A CUDA monitoring plugin for collectd</a></li>
+            <li><a href="#monitoring-gpu-metrics-on-grafana">Monitoring GPU metrics on Grafana</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+      </div>
+      
+    </div>
+    
+
+  </main>
+
+   
+
+  
+  <script src="/js/index.min.49e4d8a384357d9b445b87371863419937ede9fa77737522ffb633073aebfa44.js" integrity="sha256-SeTYo4Q1fZtEW4c3GGNBmTft6fp3c3Ui/7YzBzrr&#43;kQ=" crossorigin="anonymous"></script>
+  
+  
+
+  
+    <script src="/js/table-of-contents.js"></script>
+  
+
+
+</body>
+
+</html>

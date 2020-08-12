@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <title>Automatization of Techlab&#39;s Request Management Process | My New Hugo Site</title>
+
+  <meta charset="UTF-8">
+  <meta name="language" content="en">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  
+  
+
+  <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+
+  
+  
+    
+ 
+  
+  
+  
+  
+  
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/post.min.423aef0742dab2335ffc1d5a5b0232425b83fbb8ff30ab07fa55524587262ef4.css" integrity="sha256-QjrvB0LasjNf/B1aWwIyQluD&#43;7j/MKsH&#43;lVSRYcmLvQ="/>
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/custom.min.e82b10a78547c055d0865dc60c44d991716134ea551429c086ee814d26150ee1.css" integrity="sha256-6CsQp4VHwFXQhl3GDETZkXFhNOpVFCnAhu6BTSYVDuE="/>
+  
+  
+   
+   
+    
+
+<script type="application/ld+json">
+  
+    {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/"
+      },
+      "articleSection" : "blog",
+      "name" : "Automatization of Techlab\u0027s Request Management Process",
+      "headline" : "Automatization of Techlab\u0027s Request Management Process",
+      "description" : "",
+      "inLanguage" : "en-US",
+      "author" : "",
+      "creator" : "",
+      "publisher": "",
+      "accountablePerson" : "",
+      "copyrightHolder" : "",
+      "copyrightYear" : "2020",
+      "datePublished": "2020-06-21 09:12:19 \u002b0200 CEST",
+      "dateModified" : "2020-06-21 09:12:19 \u002b0200 CEST",
+      "url" : "http:\/\/example.org\/blog\/cern\/rms\/",
+      "wordCount" : "2975",
+      "keywords" : ["Blog"]
+    }
+  
+  </script>
+</head>
+
+<body>
+  <div class="burger__container">
+  <div class="burger" aria-controls="navigation" aria-label="Menu">
+    <div class="burger__meat burger__meat--1"></div>
+    <div class="burger__meat burger__meat--2"></div>
+    <div class="burger__meat burger__meat--3"></div>
+  </div>
+</div>
+ 
+
+  <nav class="nav" id="navigation">
+  <ul class="nav__list">
+    
+    
+      <li>
+        <a  href="/">about</a>
+      </li>
+    
+      <li>
+        <a  class="active"
+         href="/blog">blog</a>
+      </li>
+    
+  </ul>
+</nav>
+
+
+  <main>
+    
+    
+
+    <div class="flex-wrapper">
+      <div class="post__container">
+        <div class="post">
+          <header class="post__header">
+            <h1 id="post__title">Automatization of Techlab&#39;s Request Management Process</h1>
+            <time datetime="2020-06-21 09:12:19 &#43;0200 CEST" class="post__date">Jun 21 2020</time> 
+          </header>
+          <article class="post__content">
+              
+<section class="warning_block">
+<h4> Warning </h4>
+<p> This is an old post, Techlab was an interesting project that, unfortunately, no longer exist.</p>
+</section>
+<section class="info_block">
+<h4> Background on Techlab, from the website </h4>
+<p> Techlab is a CERN IT project providing testing/benchmarking platforms for multiple architectures and accelerators. We gather users requests, analyze market trends and procure cutting edge hardware. We then set it up, test it and put it up for experimental use by members of the HEP community.</p>
+<p>Techlab systems are operated as evolving, test systems, on a best effort basis, and must not be used for production work or with sensitive data. Hosts are reinstalled on a regular basis and user data is permanently deleted at the end of each test slot.</p>
+<p>Under some conditions and subject to availability, it may be possible to loan a Techlab system for longer periods, for example to pilot a build system on new platforms.</p>
+<p>Core principles of Techlab:</p>
+<ul>
+<li> Everything can be published - no NDA </li>
+<li> Hardware is off-the-shelves - No development boards </li>
+<li> Hardware is periodically updated based community feedback and industry trends </li>
+<li> Multiple vendors and platforms </li>
+<li> No production service or guaranteed availability - This is a lab! </li>
+</ul>
+</section>
+<p>Techlab&rsquo;s request management process has seen several improvements in terms of bookkeeping and accountability over its lifetime, from handling requests via email and manually configuring the nodes, to the use of autoconfiguration tools. Despite these improvements, the request management process still relies heavily on manual intervention in several points of the system.</p>
+<p>Here we define the next evolution of Techlab&rsquo;s request management and describe the system developed to streamline this process, mitigating manual intervention and automating it as much as possible. In Section 1, we describe the current request process and its inconveniences, while in Section 2, we propose an improved way to handle the requests and specify its ideal requirements. In Section 3, we describe the design decisions taken and the Application Programming Interface (API) of the new request management system developed. Finally, in Section 4, we analyze the improvements.</p>
+<h2 id="1-the-current-request-process-workflow-and-infrastructure">1. The current request process: workflow and infrastructure<a class="anchor" href="#1-the-current-request-process-workflow-and-infrastructure">#</a></h2>
+<p>Users&rsquo; requests are handled through <a href="https://cern.service-now.com/service-portal/">CERN&rsquo;s Service Portal</a>, a service management and IT support solution with <a href="https://www.servicenow.com/">ServiceNow</a> software at its backbone.</p>
+<p>With few exceptions, Techlab machines are enrolled on CERN&rsquo;s cloud infrastructure, capitalizing on the configuration management system in place. Lifecycle management tools such as <a href="https://theforeman.org/">Foreman</a> or automation frameworks such as <a href="https://puppet.com/">Puppet</a> remarkably simplify the configuration and administration of Techlab&rsquo;s nodes. However, up to this point, CERN only supports x86 architectures. Thus, Techlab&rsquo;s arm and PowerPc nodes have to be configured manually.</p>
+<p>One of the most relevant concepts of CERN&rsquo;s configuration system is the hostgroup, Foreman&rsquo;s notion of a cluster of computers. Puppet&rsquo;s configuration centerpieces are the manifest files and the Hiera (Puppet’s built-in key/value data lookup system) files. Manifests describe, in Puppet&rsquo;s domain-specific language, the common configuration to be applied to the nodes in a hostgroup, while Hiera files provide key-value data in yaml format that is fed to the manifest at configuration time. This separation allows, for instance, the specification of values such as node users in a node-specific Hiera file, which is digested by the manifest to configure each node.</p>
+<p>A request&rsquo;s lifetime frequently evolves as follows:</p>
+<p>The user fills in the request form on the Service Portal, specifying their project, the systems they would like to access, the loan period, and the users requiring access to the hosts. Once introduced in the system, the service managers are notified and one of them takes ownership of the request, discussing the options with the user if needed. After reaching an agreement on the terms of the loan, f.e. loan period or nodes involved, the request handler will fill the corresponding fields in the request&rsquo;s managent form and proceed to configure the system manually. The request will be kept open until the expiration date, at which point the request handler might offer the requesting user an extension, depending on resource availability and utilization.</p>
+<p>We can identify several points of improvement for this workflow:</p>
+<ul>
+<li>It is time inefficient. While this system provides better accountability than managing the request privately (f.e., by email), it still has the cost of checking for request expiration manually on ServiceNow. This can be too time consuming when the number of users requests grow.</li>
+<li>It is still prominently manual. Puppet simplifies the configuration and installation of the nodes, but it still requires explicit intervention of the system administrator to describe the configuration on a node basis.</li>
+<li>It is redundant. The requests and the configuration files both contain redundant data, such as users, loan period and request number.</li>
+</ul>
+<h2 id="2-proposal-and-requirements">2. Proposal and requirements<a class="anchor" href="#2-proposal-and-requirements">#</a></h2>
+<p>We propose a new, automated request-handling system that capitalizes on existing APIs and data redundancies between the different steps of the existing solution. Thus, we define the following functional and non-functional requirements.</p>
+<p>Functional Requirements:</p>
+<ul>
+<li>Given a user request, our system should generate the node specific files needed for Puppet to configure the nodes involved in the request.</li>
+<li>When a request expires, the system should be able to clean up the configuration files and remove all access to the machines.</li>
+<li>Users should be notified, by email, of the expiration of their requests in advance, preferably automatically.</li>
+<li>The notification sent to the users should contain a link to the request in case they want to apply for an extension.</li>
+</ul>
+<p>Non-Functional Requirements:</p>
+<ul>
+<li>The system should collect data from the requests taking advantage of <a href="https://gitlab.cern.ch:8443/servicenow/snow-client">CERN&rsquo;s ServiceNow Python API</a>.</li>
+<li>Emails reminding the users of the expiration date should be sent 15 and 5 days in advance of the loan&rsquo;s expiration date.</li>
+<li>The system should be implemented based on a strict and constrained formatting of the configuration files, increasing its simplicity and reducing uncertainty.</li>
+<li>The system should be modular, composed of a minimal Python API at its core, complemented with executable scripts implementing the request management and the sanitization of files and requests.</li>
+<li>The automated process should use the executable scripts.</li>
+<li>The node-specific Hiera files should contain all the relevant information of its associated requests.</li>
+<li>The ServiceNow interface should implement caching to reduce queries to ServiceNow, due to the time consuming nature of the operation.</li>
+</ul>
+<h2 id="3-the-new-request-management-system">3. The new request management system<a class="anchor" href="#3-the-new-request-management-system">#</a></h2>
+<p>We can divide the final request management into three different parts, the request management API, a minimal Python module that contatins a class to interface with the configuration system and another one to interface with the requests on ServiceNow; the helpers, functions that implement the most common operations when handling requests; and the executables, which consist of a simple solution for synchronizing the requests and the configuration system, and another one for format enforcement and data sanitization.</p>
+<p>In Section 3.1 we define the different calls implemented in the system API. Then, in Section 3.2, we detail the system design and the algorithms involved in the process. Finally, in Section 3.3 we describe a simple way to automate the whole process.</p>
+<h3 id="31-system-api">3.1. System API<a class="anchor" href="#31-system-api">#</a></h3>
+<p>In this section, we outline all programming interfaces we expose to the user, differentiating them in three groups: request management interfaces, helpers and executables.</p>
+<h4 id="request-management-interfaces">Request management interfaces</h4>
+<p>The request_management Python module includes the bare minimum operations to both interface with ServiceNow and perform input/output (I/O) operations, in our constrained format, involving the configuration files. In this module, we implement the concept of a compute node, in the <code>Node</code> class; and a class that acts as an interface to ServiceNow, <code>SnowSession</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#6272a4"># Build a node object from a request data dictionary</span>
+Node<span style="color:#ff79c6">.</span>from_request(requestObject)
+<span style="color:#6272a4"># Load a node object from its yaml representation</span>
+Node<span style="color:#ff79c6">.</span>from_yaml(<span style="color:#f1fa8c">&#34;path/file.yaml&#34;</span>)
+<span style="color:#6272a4"># Write a node object to a yaml file</span>
+Node<span style="color:#ff79c6">.</span>to_yaml(<span style="color:#f1fa8c">&#34;path/file.yaml&#34;</span>)
+
+<span style="color:#6272a4"># Loads the ServiceNow Api configuration file and sets up a session</span>
+SnowSession snow_session(<span style="color:#f1fa8c">&#34;config.yaml&#34;</span>)
+<span style="color:#6272a4"># Fetches and caches the open requests from ServiceNow...</span>
+<span style="color:#6272a4"># ...or retrieves them from the internal cache</span>
+snow_session<span style="color:#ff79c6">.</span>requests()
+<span style="color:#6272a4"># Returns the faulty requests identified in the fetching phase</span>
+snow_session<span style="color:#ff79c6">.</span>faulty_reqs()
+<span style="color:#6272a4"># Returns the information of a single request.</span>
+<span style="color:#6272a4"># Fetches requests if request cache is empty</span>
+service_now<span style="color:#ff79c6">.</span>single_request(req_id)
+</code></pre></div><h4 id="helpers">Helpers</h4>
+<p>For convenience, we provide a set of functions to exploit the most common actions in <code>action_helpers</code>. The helpers implemented include:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#ff79c6">from</span> action_helpers.py <span style="color:#ff79c6">import</span> <span style="color:#ff79c6">*</span>
+
+<span style="color:#6272a4"># Return the requests expiring in remaining days</span>
+<span style="color:#6272a4"># Optionally don&#39;t include (current day + remaining_days) day</span>
+reqs <span style="color:#ff79c6">=</span> requests_expiring_in_x_days(remaining_days, less_than<span style="color:#ff79c6">=</span>False):
+
+<span style="color:#6272a4"># Clean up all traces of a request from a node</span>
+purge_req_from_node(req_id, node_name, <span style="color:#f1fa8c">&#34;path/to/hiera_files.yaml&#34;</span>):
+
+<span style="color:#6272a4"># Remove all traces of a particular request</span>
+clean_request(req_id, hiera_path)
+
+<span style="color:#6272a4"># Remove all traces of just expired request</span>
+clean_expired_requests(hiera_path)
+
+<span style="color:#6272a4"># Check if there are new requests.</span>
+<span style="color:#6272a4"># Updates the nodes associated to new requests if the update parameter is True</span>
+new_requests, updated_nodes <span style="color:#ff79c6">=</span> check_for_new_requests(update<span style="color:#ff79c6">=</span>False):
+
+<span style="color:#6272a4">#Update a node from the information of a request</span>
+updated_node <span style="color:#ff79c6">=</span> update_node_from_request(node, request_id)
+
+<span style="color:#6272a4">#List the open requests associated to a user</span>
+requested_by_user <span style="color:#ff79c6">=</span> requests_associated_to_user(username)
+
+<span style="color:#6272a4">#Cleans up a node.</span>
+delete_node(<span style="color:#f1fa8c">&#34;path/to/node.yaml&#34;</span>)
+</code></pre></div><h4 id="executables">Executables</h4>
+<p>Finally, we provide two executables, <code>housekeeper.py</code>, which synchronizes the configuration files with the latest information from the requests and warns users and administrators about deadlines; and <code>format_police.py</code>, which checks that both node files and requests are correctly formatted according to our constrained design guidelines.</p>
+<pre><code>1. Check for problematic active requests
+2. Check issues in request
+3. Check for problematic node files (no request tags)
+4. Exit/Quit
+
+What would you like to do?
+</code></pre><h3 id="32-system-design-and-algorithms">3.2. System Design and Algorithms<a class="anchor" href="#32-system-design-and-algorithms">#</a></h3>
+<p>In this section we describe and justify the system design. First we explain how, by enforcing a strict formatting, we simplify the parsing of nodes and requests and their data structure representations. Then, we introduce the hardware-labs&rsquo; request form in CERN&rsquo;s service portal and the conventions adopted when filling the administrator fields, which allow for a deterministic retrieval of request information as a Python key-value (field-contents) datastructure. Next, we outline the process of retrieving the ServiceNow forms&rsquo; information and building a list with the open requests. Finally, we describe how everything comes together and the interactions with the user programmed into the system.</p>
+<p>Figure 1 depicts a diagram of the system, where we can identify the different components mentioned beforehand and their dependencies.</p>
+<figure>
+    <img src="/media/RMS/RMS.jpg"
+         alt="RMS"/> <figcaption>
+            <p><em><strong>Figure 1</strong>: new Request Management System.</em></p>
+        </figcaption>
+</figure>
+
+<h4 id="strict-formatting-and-metadata-extensions">Strict formatting and metadata extensions.</h4>
+<p>Puppet&rsquo;s Hiera files are yaml files structured in key-value(s) blocks. The only essential block, whose existence all other blocks depend on, is the user data block, <code>sssd::interactiveallowusers:</code>. In our system, each node has its associated Hiera file. For instance, the configuration data for <code>techlab-ops.cern.ch</code>—such as users, rootusers, and extra packages to be installed—is described in the file <code>techlab-ops.cern.ch.yaml</code>, and will be combined with the hostgroup&rsquo;s configuration before a Puppet configuration run.</p>
+<p>Techlab and openlab&rsquo;s nodes are usually shared between users from multiple requests. One of the most common operations when assigning a node to a new request is consulting the expiration date of the existing requests associated to said node. For this purpose, Techlab and openlab&rsquo;s teams agreed on a way to enrich the information on the Hiera files by introducing metadata as formatted comments on the username, where each tag is preceded by a space plus two hashes, and is followed by a space.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#ff79c6">sssd::interactiveallowusers</span>:
+  - <span style="color:#ff79c6">xvallspl ##t From</span>: To:<span style="color:#bd93f9">01</span>/<span style="color:#bd93f9">01</span>/<span style="color:#bd93f9">2020</span>
+  - <span style="color:#ff79c6">acatmilton ##t From</span>: To:<span style="color:#bd93f9">01</span>/<span style="color:#bd93f9">01</span>/<span style="color:#bd93f9">2020</span>
+  - <span style="color:#ff79c6">espinete ##t From</span>: To:<span style="color:#bd93f9">01</span>/<span style="color:#bd93f9">01</span>/<span style="color:#bd93f9">2020</span>
+  - <span style="color:#ff79c6">apurr ##t From</span>: To:<span style="color:#bd93f9">01</span>/<span style="color:#bd93f9">10</span>/<span style="color:#bd93f9">2020</span>
+</code></pre></div><p>Here, we build on the metadata as comments idea and extend the user-associated request information in the node with more relevant information tags: <strong>t</strong>, start and end dates in ISO format; <strong>r</strong>, request number; <strong>p</strong>, project description; <strong>e</strong>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#ff79c6">sssd::interactiveallowusers</span>:
+  - xvallspl <span style="color:#6272a4">##t From:2019-03-01 To:2019-04-30 ##r RQF1243159 ##p Automatization of request management ##e Techlab</span>
+  - murray <span style="color:#6272a4">##t From:2019-03-01 To:2019-04-30 ##r RQF1541658  ##p Testing interfaces for cat operated GPUs ##e Catlove</span>
+<span style="color:#ff79c6">sudoers</span>:
+  - xvallspl
+</code></pre></div><p>In addition, to reduce complexity, and to constrain and simplify the parsing of the Hiera files, we impose the following restrictions:</p>
+<ul>
+<li>We only accept one level of identation, with a two space indent.</li>
+<li>Every block starts with an unindented key, which is followed either by a single value, or a list of values in consecutive indented lines.</li>
+<li>Users from the user block, and only from the user block, are always followed by metadata as comments, strictly following the previously discussed format.</li>
+<li>The <strong>t</strong> and <strong>r</strong> tags always contain complete information.</li>
+</ul>
+<p>Enforcing a strict formatting of the node files and requests also allows us to simplify their data structure representation and, with it, the operations of writing to and retrieving from a Hiera file the request information associated with a specific user of the node.</p>
+<p>Finally, the program fails in cases not following the format described above. For prevention and format debugging, we provide an executable sanitizer, <code>format_police.py</code>, that helps identify and solve fomat problems in the node files or in the ServiceNow request forms.</p>
+<h4 id="servicenows-form-and-adopted-conventions">ServiceNow&rsquo;s form and adopted conventions</h4>
+<p>To reduce potential points of failure and avoid redundant typing of data, all node configuration data is introduced by the request administrator in the ServiceNow request form, and then propagated, including the metadata typed above, by the system to the node files. Any direct manual intervention in the node files is discouraged.</p>
+<p>The administration section of the form has dedicated fields for users, nodes and start and end loan dates, which must be agreed on with the users. In addition, we can fill in any extra configuration (sudoers, Python packages required) in the <em>Setup Comments</em> field of the form. Keep in mind that the configuration data described in the form will be applied to each node assigned to the request.</p>
+<p>However, for the request to be considered valid, the administrator form fields (Figure 2) should comply with their own restrictions:</p>
+<ul>
+<li>If a request status is <em>in progress</em>, the loan dates fields must be filled.</li>
+<li>Any blocks of data other than users has to be expressed as key-value(s) pair in an independent line in the <em>Setup comments</em> field of the form.</li>
+<li>Any list of users or of node configuration data must be formatted as comma separated values.</li>
+</ul>
+<figure>
+    <img src="/media/RMS/form.png"
+         alt="Form"/> <figcaption>
+            <p><em><strong>Figure 2</strong>: Example of an admin form with extra configuration data blocks.</em></p>
+        </figcaption>
+</figure>
+
+<h4 id="fetching-the-requests-and-managing-computing-nodes-configurations">Fetching the requests and managing computing nodes configurations</h4>
+<p>The communication with ServiceNow is handled by the <code>SnowSession</code> class in the main Python module, capitalizing on CERN&rsquo;s ServiceNow Python API to retrieve the information from all open requests. Each instance of the class opens a new communicating session with the server.</p>
+<p>Because of the sizeable cost of the queries to ServiceNow, due to its internal database structure, <code>SnowSession</code> only fetches requests in <em>in progress</em> status and implements caching mechanisms for the retrieved requests. Only the most relevant request information is retrieved from the ServiceNow form fields and stored in a key-value data structure (a Python dictionary). For reference, the request dictionary has the following structure:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">{
+  <span style="color:#f1fa8c">&#39;end_date&#39;</span>: datetime<span style="color:#ff79c6">.</span>datetime(<span style="color:#bd93f9">2020</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">19</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>),
+  <span style="color:#f1fa8c">&#39;experiment&#39;</span>: <span style="color:#f1fa8c">u</span><span style="color:#f1fa8c">&#39;CatHEP&#39;</span>,
+  <span style="color:#f1fa8c">&#39;id&#39;</span>: <span style="color:#f1fa8c">u</span><span style="color:#f1fa8c">&#39;RQF1412862&#39;</span>,
+  <span style="color:#f1fa8c">&#39;nodes&#39;</span>: [<span style="color:#f1fa8c">u</span><span style="color:#f1fa8c">&#39;techlab-gpu-canthugeverycat&#39;</span>],
+  <span style="color:#f1fa8c">&#39;opened_by&#39;</span>: <span style="color:#f1fa8c">u</span><span style="color:#f1fa8c">&#39;Aaron Purr&#39;</span>,
+  <span style="color:#f1fa8c">&#39;opened_by_id&#39;</span>: <span style="color:#f1fa8c">u</span><span style="color:#f1fa8c">&#39;aaronpurr&#39;</span>,
+  <span style="color:#f1fa8c">&#39;project&#39;</span>: <span style="color:#f1fa8c">u</span><span style="color:#f1fa8c">&#34;Can&#39;t hug every cat&#34;</span>,
+  <span style="color:#f1fa8c">&#39;setup_comments&#39;</span>:
+    {
+      <span style="color:#f1fa8c">u</span><span style="color:#f1fa8c">&#39;sudoers:&#39;</span>: [<span style="color:#f1fa8c">u</span><span style="color:#f1fa8c">&#39;aaronpurr&#39;</span>]
+    },
+  <span style="color:#f1fa8c">&#39;start_date&#39;</span>: datetime<span style="color:#ff79c6">.</span>datetime(<span style="color:#bd93f9">2019</span>, <span style="color:#bd93f9">9</span>, <span style="color:#bd93f9">20</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>),
+  <span style="color:#f1fa8c">&#39;users&#39;</span>: [<span style="color:#f1fa8c">u</span><span style="color:#f1fa8c">&#39;aaronpurr&#39;</span>, <span style="color:#f1fa8c">u</span><span style="color:#f1fa8c">&#39;a.ham&#39;</span>, <span style="color:#f1fa8c">u</span><span style="color:#f1fa8c">&#39;t.jefferson&#39;</span>]
+}
+</code></pre></div><p>Where <em>experiment</em>, <em>project</em> and <em>setup_comments</em> are the only fields allowed empty values.</p>
+<p>The <code>Node</code> datastructure, describing a computing node configuration, can be built both from requests and Hiera files, with the <code>Node.from_request(&quot;request_id&quot;)</code> and <code>Node.from_yaml(&quot;path/to/node_file.yaml&quot;)</code> constructors respectively, and stored as Hiera node configuration file, calling <code>Node.to_yaml(&quot;path/to/node_file.yaml&quot;)</code>. A Node instance, contains the following information:</p>
+<ul>
+<li>Users. Users with access to the node.</li>
+<li>Associated Requests. Requests this node configuration is associated with.</li>
+<li>Release date. Date when the node is expected to be completely freed.</li>
+<li>Extra keys. Extra configuration blocks applied to this node, such as sudoers, rootusers and cvmfs mounted folders.</li>
+</ul>
+<h4 id="executing-the-process-and-warning-the-users">Executing the process and warning the users</h4>
+<p>The classes described above can be used to build or edit the node configuration files from the information of a request once the user request have been accepted and the administrators have completed the corresponding fields in the ServiceNow form.</p>
+<p>We provide a convenient way to execute the complete request management process in <code>housekeeper.py</code>. This executable script performs the following actions in order, leveraging the functions in ```action_helpers.py``:</p>
+<ol>
+<li>Update node configuration files with any updates in the ServiceNow requests, for instance, loan extensions.</li>
+<li>Identify new requests and update a stored list of open request. Apply the configuration to the respective node Hiera files.</li>
+<li>Clean the expired requests.</li>
+<li>Warn users of expiring requests.</li>
+<li>Warn administrators of changes made and expired requests.</li>
+</ol>
+<p>For the last two steps, we implemented a request-aware email notification system. Figure 3 illustrates an email example. Note that the email template is filled in with request-specific informations—the user&rsquo;s first name, the nodes associated to the request, and the loan days left⁠—and provides the user with a clickable button that links directly to the request form, suggesting to apply for an extension in case of need.</p>
+<figure>
+    <img src="/media/RMS/email.png"
+         alt="email"/> <figcaption>
+            <p><em><strong>Figure 3</strong>: Email received by the user warning of a request expiration.</em></p>
+        </figcaption>
+</figure>
+
+<h3 id="32-automating-the-process">3.2. Automating the process<a class="anchor" href="#32-automating-the-process">#</a></h3>
+<p>This full process can be automated to run unsupervised on a daily basis. However, for security reasons and for modularity, the node configuration files are stored on internal CERN git repositories for their root hostgroups, to which only members of the hostgroup are granted writing access. In addition, the ServiceNow session configuration file contains secrets, so it can&rsquo;t be distributed openly. To overcome this concern, a sample configuration file is stored in <a href="https://configdocs.web.cern.ch/configdocs/secrets/adding.html">tbag</a>, CERN&rsquo;s IT service for managing secrets, only retrievable by members of the hardware_labs hostgroup.</p>
+<p>With the restrictions described in mind, the automation of the process can be programmed with an authenticated cron job that runs, for instance, the following script:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># Update the hostgroup&#39;s local repository</span>
+<span style="color:#8be9fd;font-style:italic">cd</span> &lt;user_path&gt;/it-puppet-hostgroup-hardware_labs/
+git fetch origin
+git rebase origin/master
+<span style="color:#8be9fd;font-style:italic">cd</span> -
+
+<span style="color:#6272a4"># Retrieve the configuration file from the secrets store</span>
+tbag show --hg hardware_labs --file config.yaml config.yaml
+<span style="color:#6272a4">#Run the request management process</span>
+Python housekeeper.py
+
+<span style="color:#6272a4"># Publish the changes</span>
+<span style="color:#8be9fd;font-style:italic">cd</span> &lt;user_path&gt;/it-puppet-hostgroup-hardware_labs/
+git add .
+git commit -m <span style="color:#f1fa8c">&#34;[techlab] updates from the automated system&#34;</span>
+git push origin master
+</code></pre></div><p>Note that this is an authenticated job that needs to be executed by the hostgroup administrators, or both the secret retrieval and the git push command would fail.</p>
+<h2 id="4-conclusions">4. Conclusions<a class="anchor" href="#4-conclusions">#</a></h2>
+<p>This new request system reduces redundancy and points of failure and allows for the automation of a large portion of request handling process.</p>
+
+
+              
+          </article>
+          
+
+ <div class="pagination">
+  
+    <a class="pagination__item" href="http://example.org/blog/cern/analysischain/">
+        <span class="pagination__label">Previous Post</span>
+        <span class="pagination__title">Physics analysis in the LHC era</span>
+    </a>
+  
+
+  
+</div>
+
+          
+          <footer class="post__footer">
+            <div class="social-icons">
+    
+    
+    
+    <a class="social-icons__icon social-icons__icon--linkedin"
+        href="https://www.linkedin.com/in/xaviervallspla"></a>
+    
+</div>
+            <p></p>
+          </footer>
+          </div>
+      </div>
+      
+      <div class="toc-container">
+          
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-the-current-request-process-workflow-and-infrastructure">1. The current request process: workflow and infrastructure</a></li>
+        <li><a href="#2-proposal-and-requirements">2. Proposal and requirements</a></li>
+        <li><a href="#3-the-new-request-management-system">3. The new request management system</a>
+          <ul>
+            <li><a href="#31-system-api">3.1. System API</a></li>
+            <li><a href="#32-system-design-and-algorithms">3.2. System Design and Algorithms</a></li>
+            <li><a href="#32-automating-the-process">3.2. Automating the process</a></li>
+          </ul>
+        </li>
+        <li><a href="#4-conclusions">4. Conclusions</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+      </div>
+      
+    </div>
+    
+
+  </main>
+
+   
+
+  
+  <script src="/js/index.min.49e4d8a384357d9b445b87371863419937ede9fa77737522ffb633073aebfa44.js" integrity="sha256-SeTYo4Q1fZtEW4c3GGNBmTft6fp3c3Ui/7YzBzrr&#43;kQ=" crossorigin="anonymous"></script>
+  
+  
+
+  
+    <script src="/js/table-of-contents.js"></script>
+  
+
+
+</body>
+
+</html>

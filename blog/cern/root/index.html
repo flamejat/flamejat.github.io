@@ -19,9 +19,7 @@
 
   
   
-  
-  <link rel="stylesheet" href="/css/override.css" />
-  <link rel="stylesheet" href="/css/syntax.css" />
+    
  
   
   
@@ -30,10 +28,10 @@
   
   
     
-    <link rel="stylesheet" href="/css/post.min.e7144c628d70258bc23498e677d7a2b8f03f54cbbb587a39d9fc0419ff49dc59.css" integrity="sha256-5xRMYo1wJYvCNJjmd9eiuPA/VMu7WHo52fwEGf9J3Fk="/>
+    <link type="text/css" rel="stylesheet" href="/css/post.min.423aef0742dab2335ffc1d5a5b0232425b83fbb8ff30ab07fa55524587262ef4.css" integrity="sha256-QjrvB0LasjNf/B1aWwIyQluD&#43;7j/MKsH&#43;lVSRYcmLvQ="/>
   
     
-    <link rel="stylesheet" href="/css/custom.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css" integrity="sha256-47DEQpj8HBSa&#43;/TImW&#43;5JCeuQeRkm5NMpJWZG3hSuFU="/>
+    <link type="text/css" rel="stylesheet" href="/css/custom.min.e82b10a78547c055d0865dc60c44d991716134ea551429c086ee814d26150ee1.css" integrity="sha256-6CsQp4VHwFXQhl3GDETZkXFhNOpVFCnAhu6BTSYVDuE="/>
   
   
    
@@ -63,7 +61,7 @@
       "datePublished": "2019-06-13 09:02:03 \u002b0200 CEST",
       "dateModified" : "2019-06-13 09:02:03 \u002b0200 CEST",
       "url" : "http:\/\/example.org\/blog\/cern\/root\/",
-      "wordCount" : "6874",
+      "wordCount" : "6875",
       "keywords" : ["Blog"]
     }
   
@@ -80,7 +78,7 @@
 </div>
  
 
-  <nav class="nav" role="navigation">
+  <nav class="nav" id="navigation">
   <ul class="nav__list">
     
     
@@ -101,23 +99,23 @@
     
     
 
-    <div class="post__container">
-      <div class="post">
-        <header class="post__header">
-          <h1 id="post__title">ROOT</h1>
-          <time datetime="2019-06-13 09:02:03 &#43;0200 CEST" class="post__date"
-          >Jun 13 2019</time>
-        </header>
-        <article class="post__content">
-            
-<p class="warning"> This article is part of a series that I'm slowly publishing, and it still has several broken links referencing unpublished articles.</p>
+    <div class="flex-wrapper">
+      <div class="post__container">
+        <div class="post">
+          <header class="post__header">
+            <h1 id="post__title">ROOT</h1>
+            <time datetime="2019-06-13 09:02:03 &#43;0200 CEST" class="post__date">Jun 13 2019</time> 
+          </header>
+          <article class="post__content">
+              
+<section class="warning_block"> <p>This article is part of a series that I'm slowly publishing, and it still has several broken links referencing unpublished articles.</p></section>
 <p><a href="https://root.cern">ROOT</a><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> is an open-source, cross-platform, object-oriented C++ framework for data analysis, conceived for the practice of High Energy Physics (HEP). Starting as a private project by Rene Brun and Fons Rademakers, ROOT has been at the heart of most HEP analyses during more than two decades, in continuous development and improvement, being in constant communication with the community, obtaining invaluable feedback, providing great toolkit support, and evolving the product according to the needs of its userbase.</p>
 <p>ROOT experienced an early fast adoption and it was soon adopted as the oﬃcial LHC analysis framework. Today, ROOT is a fundamental tool in the ﬁeld of HEP, and continues to be developed as a collaboration between research institutions and particular users around the world. Every day thousands of physicists use ROOT-based applications to analyze and visualize their data. Designed for storing and analyzing exabytes of data eﬃciently, ROOT oﬀers a coherent set of features oriented to HEP data analysis. One of ROOT’s most important features is the streaming of C++ classes to a compressed machine-independent ﬁle format. These C++ classes are often the ones ROOT optimizes and oﬀers for the statistical analysis of large datasets in columnar (stored and accessed column-wise) format.</p>
 <p>In order to perform statistical analysis, physicists have at their disposition in ROOT a considerable number of functions, methods and libraries (e.g. RooFit, RooStats) especially oriented to the most common operations in HEP, such as ﬁtting or multivariate analysis. The results of the analysis can be visualized directly from ROOT, without the need for external libraries, and stored in high quality graphic plots in any of the most common and important formats.</p>
 <p>The complete analysis can be developed incrementally with Cling, ROOT’s interactive interpreter, beneﬁting from fast prototyping and exploration of ideas. Furthermore, it can be programmed in languages other than C++ thanks to ROOT’s language bindings for R and Python. The library implementing Python bindings, PyROOT, is increasing in popularity due to the possibility to interface with widely used Python
 scientific libraries, such as NumPy or TensorFlow. ROOT acknowledges
 this by designing its new features with it in mind, e.g. RDataFrame<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
-<p>This article describes some of ROOT’s most important components. ROOT’s long-lived success and early fast adoption has been traditionally based on its highly useful features for HEP analysis, such as its interactive C++ interpreter (Section <a href="#1-Cling">1</a>); its high-performant I/O (Section 3.2); its mathematical and statistical libraries (Section 3.4); and the graphic representation of the analysis (Section 3.6). Furthermore, ROOT now oﬀers new exciting developments for the physicists of tomorrow, such as the new paradigm for declarative analysis, RDataFrame (Section 3.5); the adoption of implicit multithreaded parallelism by default (Section 3.3); the increasingly ubiquity of SIMD operations in Math libraries (Section 3.3); the possibility to perform web-based analysis with the Service for Web based ANalisys (SWAN)<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>; and the new redesigned interfaces for the next version of the software, ROOT 7, that are being deployed gradually into the main codebase.</p>
+<p>This article describes some of ROOT’s most important components. ROOT’s long-lived success and early fast adoption has been traditionally based on its highly useful features for HEP analysis, such as its interactive C++ interpreter (Section <a href="#1-cling">1</a>); its high-performant I/O (Section <a href="#2-inputoutput">2</a>); its mathematical and statistical libraries (Section <a href="#4-mathematical-libraries">4</a>); and the graphic representation of the analysis (Section <a href="#6-user-interfaces-and-visualization">6</a>). Furthermore, ROOT now oﬀers new exciting developments for the physicists of tomorrow, such as the new paradigm for declarative analysis, RDataFrame (Section <a href="#5-rdataframe">5</a>); the adoption of implicit multithreaded parallelism by default (Section <a href="#3-parallelism">3</a>); the increasingly ubiquity of SIMD operations in Math libraries (Section <a href="#3-parallelism">3</a>); the possibility to perform web-based analysis with the Service for Web based ANalisys (SWAN)<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>; and the new redesigned interfaces for the next version of the software, ROOT 7, that are being deployed gradually into the main codebase.</p>
 <h2 id="1-cling">1. Cling<a class="anchor" href="#1-cling">#</a></h2>
 <p>The ROOT userbase is mainly composed of non-expert users looking for a user-friendly and fast way to program their data analyses. Compiled languages, like C++, require investing a considerable amount of time in the compilation and linking stages, even more so in large codebases such as that of ROOT. This inconvenience makes interpreted languages (e.g. Python) more attractive when performance is not paramount for the nature of the problem at hand, e.g. for exploration of interfaces or for validating the execution of a simple instruction.</p>
 <p>One of the main beneﬁts oﬀered by an interpreter is faster prototyping for Rapid Application Development (RAD)<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>. Prototyping allows the developer to explore ideas cheaply (reduced cost), and it is an eﬃcient way to identify and address problems early on, to identify requirements and to estimate development costs, timescales and potential resource requirements.</p>
@@ -291,7 +289,7 @@ ROOT implements adaptative prefetching mechanisms, reading the following
 entry of the one being processed. This improves greatly the performance
 when processing remote ROOT files, making the bandwidth of the network,
 previously an important limiting factor, no longer a consideration.</p>
-<h2 id="3parallelism">3.Parallelism<a class="anchor" href="#3parallelism">#</a></h2>
+<h2 id="3-parallelism">3. Parallelism<a class="anchor" href="#3-parallelism">#</a></h2>
 <p>First developed in 1994—with segments of code dating up to a decade
 earlier—ROOT was already conceived with parallelism in mind. However,
 although considerable work was put into it by offering classes (TThread)
@@ -594,10 +592,10 @@ histograms, graphs and trees (Listing 4.1, Figure
 4.2). More information about the fitting, as well as the
 modifications implemented to parallelize the fitting process, both at
 task-level and at data-level, are provided in the article <a href="blog/CERN/root_fitting">Parallelization of the Fit in Root</a>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"> std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>TF1<span style="color:#f92672">&gt;</span> f1(<span style="color:#e6db74">&#34;f1&#34;</span>, <span style="color:#e6db74">&#34;gaus&#34;</span>);
- f1<span style="color:#f92672">-&gt;</span>SetParameters(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>);
- 
- h1<span style="color:#f92672">-&gt;</span>Fit(f1);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"> std<span style="color:#ff79c6">::</span>unique_ptr<span style="color:#ff79c6">&lt;</span>TF1<span style="color:#ff79c6">&gt;</span> f1(<span style="color:#f1fa8c">&#34;f1&#34;</span>, <span style="color:#f1fa8c">&#34;gaus&#34;</span>);
+ f1<span style="color:#ff79c6">-&gt;</span>SetParameters(<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">1</span>);
+
+ h1<span style="color:#ff79c6">-&gt;</span>Fit(f1);
 </code></pre></div><p><em><strong>Listing 4.1</strong>:  Fitting of the histogram <code>h1</code> with a Gaussian function in ROOT by calling its member function <code>Fit</code>.</em></p>
 <figure>
     <img src="/media/ROOT/ObjectFit.png"
@@ -651,20 +649,20 @@ Listing 5.1 compares the traditional way (lines 2-7) of
 filling a histogram with the entries that pass the IsGoodEntry filter
 against the same operation expressed with RDataFrame ((lines 11-12),
 showcasing the chaining of actions and transformations.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Traditional programming model
-</span><span style="color:#75715e"></span>TTreeReader <span style="color:#a6e22e">reader</span>(data);
-TTreeReaderValue<span style="color:#f92672">&lt;</span>A<span style="color:#f92672">&gt;</span> x(reader,<span style="color:#e6db74">&#34;x&#34;</span>);
-TTreeReaderValue<span style="color:#f92672">&lt;</span>B<span style="color:#f92672">&gt;</span> y(reader,<span style="color:#e6db74">&#34;y&#34;</span>);
-TTreeReaderValue<span style="color:#f92672">&lt;</span>C<span style="color:#f92672">&gt;</span> z(reader,<span style="color:#e6db74">&#34;z&#34;</span>);
-<span style="color:#66d9ef">while</span> (reader.Next()) {
-   <span style="color:#66d9ef">if</span> (IsGoodEntry(<span style="color:#f92672">*</span>x, <span style="color:#f92672">*</span>y, <span style="color:#f92672">*</span>z)) {
-      h<span style="color:#f92672">-&gt;</span>Fill(<span style="color:#f92672">*</span>x);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#6272a4">// Traditional programming model
+</span><span style="color:#6272a4"></span>TTreeReader <span style="color:#50fa7b">reader</span>(data);
+TTreeReaderValue<span style="color:#ff79c6">&lt;</span>A<span style="color:#ff79c6">&gt;</span> x(reader,<span style="color:#f1fa8c">&#34;x&#34;</span>);
+TTreeReaderValue<span style="color:#ff79c6">&lt;</span>B<span style="color:#ff79c6">&gt;</span> y(reader,<span style="color:#f1fa8c">&#34;y&#34;</span>);
+TTreeReaderValue<span style="color:#ff79c6">&lt;</span>C<span style="color:#ff79c6">&gt;</span> z(reader,<span style="color:#f1fa8c">&#34;z&#34;</span>);
+<span style="color:#ff79c6">while</span> (reader.Next()) {
+   <span style="color:#ff79c6">if</span> (IsGoodEntry(<span style="color:#ff79c6">*</span>x, <span style="color:#ff79c6">*</span>y, <span style="color:#ff79c6">*</span>z)) {
+      h<span style="color:#ff79c6">-&gt;</span>Fill(<span style="color:#ff79c6">*</span>x);
    }
 }
 
-<span style="color:#75715e">// RDataFrame
-</span><span style="color:#75715e"></span>RDataFrame <span style="color:#a6e22e">d</span>(data);
-<span style="color:#66d9ef">auto</span> h <span style="color:#f92672">=</span> d.Filter(IsGoodEntry, {<span style="color:#e6db74">&#34;x&#34;</span>,<span style="color:#e6db74">&#34;y&#34;</span>,<span style="color:#e6db74">&#34;z&#34;</span>}).Histo1D(<span style="color:#e6db74">&#34;x&#34;</span>);
+<span style="color:#6272a4">// RDataFrame
+</span><span style="color:#6272a4"></span>RDataFrame <span style="color:#50fa7b">d</span>(data);
+<span style="color:#ff79c6">auto</span> h <span style="color:#ff79c6">=</span> d.Filter(IsGoodEntry, {<span style="color:#f1fa8c">&#34;x&#34;</span>,<span style="color:#f1fa8c">&#34;y&#34;</span>,<span style="color:#f1fa8c">&#34;z&#34;</span>}).Histo1D(<span style="color:#f1fa8c">&#34;x&#34;</span>);
 </code></pre></div><p><em><strong>Listing 5.1</strong>: Comparison of the traditional programming model against RDataFrame.</em></p>
 <p>While the functional chains were the original idea that sparked the
 implementation of RDataFrame, it soon became clear that it was more
@@ -687,20 +685,20 @@ and non-trivial parallelization. Instead, RDataFrame emphasizes the
 programming model, by offering high-level features such as better
 expressivity, language economy and, most importantly, the abstraction of
 complex operations, e.g. developing parallel code.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Traditional programming model
-</span><span style="color:#75715e"></span>TTreeReader <span style="color:#a6e22e">reader</span>(data);
-TTreeReaderValue<span style="color:#f92672">&lt;</span>A<span style="color:#f92672">&gt;</span> x(reader,<span style="color:#e6db74">&#34;x&#34;</span>);
-TTreeReaderValue<span style="color:#f92672">&lt;</span>B<span style="color:#f92672">&gt;</span> y(reader,<span style="color:#e6db74">&#34;y&#34;</span>);
-TTreeReaderValue<span style="color:#f92672">&lt;</span>C<span style="color:#f92672">&gt;</span> z(reader,<span style="color:#e6db74">&#34;z&#34;</span>);
-<span style="color:#66d9ef">while</span> (reader.Next()) {
-   <span style="color:#66d9ef">if</span> (IsGoodEntry(<span style="color:#f92672">*</span>x, <span style="color:#f92672">*</span>y, <span style="color:#f92672">*</span>z)) {
-      h<span style="color:#f92672">-&gt;</span>Fill(<span style="color:#f92672">*</span>x);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#6272a4">// Traditional programming model
+</span><span style="color:#6272a4"></span>TTreeReader <span style="color:#50fa7b">reader</span>(data);
+TTreeReaderValue<span style="color:#ff79c6">&lt;</span>A<span style="color:#ff79c6">&gt;</span> x(reader,<span style="color:#f1fa8c">&#34;x&#34;</span>);
+TTreeReaderValue<span style="color:#ff79c6">&lt;</span>B<span style="color:#ff79c6">&gt;</span> y(reader,<span style="color:#f1fa8c">&#34;y&#34;</span>);
+TTreeReaderValue<span style="color:#ff79c6">&lt;</span>C<span style="color:#ff79c6">&gt;</span> z(reader,<span style="color:#f1fa8c">&#34;z&#34;</span>);
+<span style="color:#ff79c6">while</span> (reader.Next()) {
+   <span style="color:#ff79c6">if</span> (IsGoodEntry(<span style="color:#ff79c6">*</span>x, <span style="color:#ff79c6">*</span>y, <span style="color:#ff79c6">*</span>z)) {
+      h<span style="color:#ff79c6">-&gt;</span>Fill(<span style="color:#ff79c6">*</span>x);
    }
 }
 
-<span style="color:#75715e">// RDataFrame
-</span><span style="color:#75715e"></span>RDataFrame <span style="color:#a6e22e">d</span>(data);
-<span style="color:#66d9ef">auto</span> h <span style="color:#f92672">=</span> d.Filter(IsGoodEntry, {<span style="color:#e6db74">&#34;x&#34;</span>,<span style="color:#e6db74">&#34;y&#34;</span>,<span style="color:#e6db74">&#34;z&#34;</span>}).Histo1D(<span style="color:#e6db74">&#34;x&#34;</span>);
+<span style="color:#6272a4">// RDataFrame
+</span><span style="color:#6272a4"></span>RDataFrame <span style="color:#50fa7b">d</span>(data);
+<span style="color:#ff79c6">auto</span> h <span style="color:#ff79c6">=</span> d.Filter(IsGoodEntry, {<span style="color:#f1fa8c">&#34;x&#34;</span>,<span style="color:#f1fa8c">&#34;y&#34;</span>,<span style="color:#f1fa8c">&#34;z&#34;</span>}).Histo1D(<span style="color:#f1fa8c">&#34;x&#34;</span>);
 </code></pre></div><p><em><strong>Listing 5.2</strong>: Comparison of the compact and fully expressive formulation of a RDataFrame analysis.</em></p>
 <p>Thanks to Cling, we can further simplify the programming model,
 improving the expressivity and economy of the language by JIT-compiling,
@@ -925,9 +923,9 @@ AliEVE<sup id="fnref:21"><a href="#fn:21" class="footnote-ref" role="doc-noteref
 </section>
 
 
-            
-        </article>
-        
+              
+          </article>
+          
 
 <ul class="tags__list">
     
@@ -940,6 +938,11 @@ AliEVE<sup id="fnref:21"><a href="#fn:21" class="footnote-ref" role="doc-noteref
 
  <div class="pagination">
   
+    <a class="pagination__item" href="http://example.org/blog/cern/cuda/">
+        <span class="pagination__label">Previous Post</span>
+        <span class="pagination__title">Improving configuration and monitoring of Nvidia GPU servers at CERN.</span>
+    </a>
+  
 
   
     <a class="pagination__item" href="http://example.org/blog/cern/analysischain/">
@@ -949,8 +952,23 @@ AliEVE<sup id="fnref:21"><a href="#fn:21" class="footnote-ref" role="doc-noteref
   
 </div>
 
+          
+          <footer class="post__footer">
+            <div class="social-icons">
+    
+    
+    
+    <a class="social-icons__icon social-icons__icon--linkedin"
+        href="https://www.linkedin.com/in/xaviervallspla"></a>
+    
+</div>
+            <p></p>
+          </footer>
+          </div>
       </div>
       
+      <div class="toc-container">
+          
         <nav id="TableOfContents">
   <ul>
     <li>
@@ -962,7 +980,7 @@ AliEVE<sup id="fnref:21"><a href="#fn:21" class="footnote-ref" role="doc-noteref
             <li><a href="#22-the-root-trees">2.2 The ROOT Trees</a></li>
           </ul>
         </li>
-        <li><a href="#3parallelism">3.Parallelism</a>
+        <li><a href="#3-parallelism">3. Parallelism</a>
           <ul>
             <li><a href="#31-proof">3.1 PROOF</a></li>
             <li><a href="#32-executors-a-new-set-of-tools-for-expressing-parallelism-in-root">3.2 Executors: A new set of tools for expressing parallelism in ROOT</a></li>
@@ -986,35 +1004,24 @@ AliEVE<sup id="fnref:21"><a href="#fn:21" class="footnote-ref" role="doc-noteref
     </li>
   </ul>
 </nav>
+      </div>
       
     </div>
-
-    
     
 
   </main>
 
-  
-  <footer>
-      <div class="social-icons">
-    
-    
-    
-    <a class="social-icons__icon social-icons__icon--linkedin"
-        href="https://www.linkedin.com/in/xaviervallspla"></a>
-    
-</div>
-    <p></p>
-  </footer>
-
+   
 
   
   <script src="/js/index.min.49e4d8a384357d9b445b87371863419937ede9fa77737522ffb633073aebfa44.js" integrity="sha256-SeTYo4Q1fZtEW4c3GGNBmTft6fp3c3Ui/7YzBzrr&#43;kQ=" crossorigin="anonymous"></script>
   
   
+
+  
     <script src="/js/table-of-contents.js"></script>
   
-  <script src="https://unpkg.com/prismjs@^1.2"></script>
+
 
 </body>
 
