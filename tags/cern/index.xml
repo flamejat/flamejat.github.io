@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>CERN on My New Hugo Site</title>
-    <link>http://example.org/tags/cern/</link>
-    <description>Recent content in CERN on My New Hugo Site</description>
+    <title>CERN on Xavier Valls Pla</title>
+    <link>http://xvallspl.github.io/tags/cern/</link>
+    <description>Recent content in CERN on Xavier Valls Pla</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 12 Jun 2020 17:21:44 +0200</lastBuildDate>
     
-	<atom:link href="http://example.org/tags/cern/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://xvallspl.github.io/tags/cern/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Physics analysis in the LHC era</title>
-      <link>http://example.org/blog/cern/analysischain/</link>
+      <link>http://xvallspl.github.io/blog/cern/analysischain/</link>
       <pubDate>Fri, 12 Jun 2020 17:21:44 +0200</pubDate>
       
-      <guid>http://example.org/blog/cern/analysischain/</guid>
+      <guid>http://xvallspl.github.io/blog/cern/analysischain/</guid>
       <description>This article was originally within a longer text dedicated to ROOT, hence the references to it. I wrote this a while ago and some numbers, for instance the amount of data processed, might be outdated. The LHC is a circular particle accelerator located at the European Organization for Nuclear Research (CERN) and one of the most sophisticated machines ever built by humanity. In order to recreate conditions similar to those just after the Big Bang, the LHC circulates a beam of charged particles over its 27 km of circumference, increasing their momentum until they reach the appropriate energy, and then collides them at one of the 4 particle detectors in its ring: A Large Ion Collider Experiment (ALICE), A Toroidal LHC Apparatus (ATLAS), Compact Muon Solenoid (CMS) and Large Hadron Collider beauty (LHCb).</description>
     </item>
     
     <item>
       <title>ROOT</title>
-      <link>http://example.org/blog/cern/root/</link>
+      <link>http://xvallspl.github.io/blog/cern/root/</link>
       <pubDate>Thu, 13 Jun 2019 09:02:03 +0200</pubDate>
       
-      <guid>http://example.org/blog/cern/root/</guid>
+      <guid>http://xvallspl.github.io/blog/cern/root/</guid>
       <description>This article is part of a series that I&#39;m slowly publishing, and it still has several broken links referencing unpublished articles.
  ROOT1 is an open-source, cross-platform, object-oriented C++ framework for data analysis, conceived for the practice of High Energy Physics (HEP). Starting as a private project by Rene Brun and Fons Rademakers, ROOT has been at the heart of most HEP analyses during more than two decades, in continuous development and improvement, being in constant communication with the community, obtaining invaluable feedback, providing great toolkit support, and evolving the product according to the needs of its userbase.</description>
     </item>

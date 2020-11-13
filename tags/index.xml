@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on My New Hugo Site</title>
-    <link>http://example.org/tags/</link>
-    <description>Recent content in Tags on My New Hugo Site</description>
+    <title>Tags on Xavier Valls Pla</title>
+    <link>http://xvallspl.github.io/tags/</link>
+    <description>Recent content in Tags on Xavier Valls Pla</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 12 Jun 2020 17:21:44 +0200</lastBuildDate>
     
-	<atom:link href="http://example.org/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://xvallspl.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>CERN</title>
-      <link>http://example.org/tags/cern/</link>
+      <link>http://xvallspl.github.io/tags/cern/</link>
       <pubDate>Fri, 12 Jun 2020 17:21:44 +0200</pubDate>
       
-      <guid>http://example.org/tags/cern/</guid>
+      <guid>http://xvallspl.github.io/tags/cern/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ROOT</title>
-      <link>http://example.org/tags/root/</link>
+      <link>http://xvallspl.github.io/tags/root/</link>
       <pubDate>Thu, 13 Jun 2019 09:02:03 +0200</pubDate>
       
-      <guid>http://example.org/tags/root/</guid>
+      <guid>http://xvallspl.github.io/tags/root/</guid>
       <description></description>
     </item>
     
