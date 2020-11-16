@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <title>Evaluating nvme-cli new feature logs and the need to monitor them | Xavier Valls Pla</title>
+
+  <meta charset="UTF-8">
+  <meta name="language" content="en">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  
+  
+
+  <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+
+  
+  
+    
+ 
+  
+  
+  
+  
+  
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/post.min.423aef0742dab2335ffc1d5a5b0232425b83fbb8ff30ab07fa55524587262ef4.css" integrity="sha256-QjrvB0LasjNf/B1aWwIyQluD&#43;7j/MKsH&#43;lVSRYcmLvQ="/>
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/custom.min.e82b10a78547c055d0865dc60c44d991716134ea551429c086ee814d26150ee1.css" integrity="sha256-6CsQp4VHwFXQhl3GDETZkXFhNOpVFCnAhu6BTSYVDuE="/>
+  
+  
+   
+   
+    
+
+<script type="application/ld+json">
+  
+    {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/xvallspl.github.io\/"
+      },
+      "articleSection" : "blog",
+      "name" : "Evaluating nvme-cli new feature logs and the need to monitor them",
+      "headline" : "Evaluating nvme-cli new feature logs and the need to monitor them",
+      "description" : "",
+      "inLanguage" : "en-US",
+      "author" : "",
+      "creator" : "",
+      "publisher": "",
+      "accountablePerson" : "",
+      "copyrightHolder" : "",
+      "copyrightYear" : "2020",
+      "datePublished": "2020-05-15 09:12:26 \u002b0200 CEST",
+      "dateModified" : "2020-05-15 09:12:26 \u002b0200 CEST",
+      "url" : "http:\/\/xvallspl.github.io\/blog\/cern\/nvme-cli\/",
+      "wordCount" : "923",
+      "keywords" : ["Blog"]
+    }
+  
+  </script>
+</head>
+
+<body>
+  <div class="burger__container">
+  <div class="burger" aria-controls="navigation" aria-label="Menu">
+    <div class="burger__meat burger__meat--1"></div>
+    <div class="burger__meat burger__meat--2"></div>
+    <div class="burger__meat burger__meat--3"></div>
+  </div>
+</div>
+ 
+
+  <nav class="nav" id="navigation">
+  <ul class="nav__list">
+    
+    
+      <li>
+        <a  href="/">about</a>
+      </li>
+    
+      <li>
+        <a  class="active"
+         href="/blog">blog</a>
+      </li>
+    
+  </ul>
+</nav>
+
+
+  <main>
+    
+    
+
+    <div class="flex-wrapper">
+      <div class="post__container">
+        <div class="post">
+          <header class="post__header">
+            <h1 id="post__title">Evaluating nvme-cli new feature logs and the need to monitor them</h1>
+            <time datetime="2020-05-15 09:12:26 &#43;0200 CEST" class="post__date">May 15 2020</time> 
+          </header>
+          <article class="post__content">
+              
+<p>NVMe is a new, wider, standarized protocol to access flash-based storage over PCIe interfaces. NVMe introduces a new command set, several new concepts, new operations and different or more standarized logging capabilities from the habitual ones on SAS or SATA devices, together with a cli tool, <code>nvme-cli</code>, exposing a human friendly interface to the device.</p>
+<p>We take a look at the new logging capabilities to asses if the current monitoring infrastructure in place at CERN, using <code>smartmontools</code>, is enough or if we have a need for the new capabilities interfaced by <code>nvme-cli</code>.</p>
+<h2 id="summary-table">Summary table<a class="anchor" href="#summary-table">#</a></h2>
+<p>This summary reports only on error, health and failure logs, leaving aside namespace and administration logs. All nvme logs can be fetched from smartmontools, but only a few of them can be interpreted and presented for human readability. The rest are fetched as hex dumps.</p>
+<table>
+<thead>
+<tr>
+<th align="center">Log</th>
+<th align="center">Specification Mandatory</th>
+<th align="center">Relevant for our purposes</th>
+<th align="center">Interpretable from smartmontools</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><strong>Error</strong></td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center"><strong>SMART</strong></td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center"><strong>Self-test</strong></td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+<td align="center">✔</td>
+</tr>
+<tr>
+<td align="center"><strong>Telemetry</strong></td>
+<td align="center">✔</td>
+<td align="center">✖</td>
+<td align="center">✖</td>
+</tr>
+<tr>
+<td align="center"><strong>Firmware</strong></td>
+<td align="center">✔</td>
+<td align="center">✖</td>
+<td align="center">✖</td>
+</tr>
+<tr>
+<td align="center"><strong>Endurance</strong></td>
+<td align="center">✖</td>
+<td align="center">✖</td>
+<td align="center">✖</td>
+</tr>
+<tr>
+<td align="center"><strong>Sanitize</strong></td>
+<td align="center">✖</td>
+<td align="center">✖</td>
+<td align="center">✖</td>
+</tr>
+</tbody>
+</table>
+<h2 id="error-logs-assesment-in-more-detail">Error logs assesment in more detail<a class="anchor" href="#error-logs-assesment-in-more-detail">#</a></h2>
+<p>Description and relevancy assesment for all retrievable logs and their interpretation through smartmontools. We refer as interpretation the capability of retrieving and presenting the log information in a human-readable format and not as a hex dump.</p>
+<h3 id="telemetry-log">Telemetry Log<a class="anchor" href="#telemetry-log">#</a></h3>
+<ul>
+<li><strong>What does it log</strong>: Telemetry data for the vendors or OEM</li>
+<li><strong>Is this feature optional?</strong>: No</li>
+<li><strong>Is it relevant for health and error monitoring purposes?</strong>: Could be. Only if we are interested on recovering a failing disk. Standard human readable logs are encouraged but not enforced: none of the SSDs tested on had human readable telemetry logs</li>
+<li><strong>Human interpretable on smartmontools?</strong>: No</li>
+<li><strong>How to retrieve it</strong>:
+<ul>
+<li><code>smartctl -l nvmelog,0x07,0x1000 /dev/nme0n1p1</code> (Host-Initiated)</li>
+<li><code>smartctl -l nvmelog,0x08,0x1000 /dev/nme0n1p1</code> (Controller-Initiated)</li>
+<li><code>nvme telemetry-log /dev/nvme0n1p1 -o outputfile</code> (Host-Initiated)</li>
+<li><code>nvme get-log /dev/nvme0n1p1 -i 0x08 -l 0x1000</code> (Controller-Initiated, NOT interpreted)</li>
+</ul>
+</li>
+</ul>
+<h3 id="firmware-log">Firmware Log<a class="anchor" href="#firmware-log">#</a></h3>
+<ul>
+<li><strong>What does it log</strong>: Firmware log, with fields such as firmware slot or firmware revision</li>
+<li><strong>Is this feature optional?</strong>: No</li>
+<li><strong>Is it relevant for health and error monitoring purposes?</strong>: Maybe, but probably not</li>
+<li><strong>Human interpretable on smartmontools?</strong>:  No</li>
+<li><strong>How to retrieve it</strong>:
+<ul>
+<li><code>smartctl -l nvmelog,0x3,0x1000 /dev/nvme0n1p1</code></li>
+<li><code>nvme fw-log /dev/nvme0n1p1</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="smart-log">SMART Log<a class="anchor" href="#smart-log">#</a></h3>
+<ul>
+<li><strong>What does it log</strong>: SMART attributes as standarized by the NVME specification</li>
+<li><strong>Is this feature optional?</strong>: No</li>
+<li><strong>Is it relevant for health and error monitoring purposes?</strong>: Yes</li>
+<li><strong>Human interpretable on smartmontools?</strong>: Yes</li>
+<li><strong>How to retrieve it</strong>:
+<ul>
+<li><code>smartctl -a /dev/nme0n1p1</code></li>
+<li><code>nvme smart-log /dev/nvme0n1p1</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="error-log">Error Log<a class="anchor" href="#error-log">#</a></h3>
+<ul>
+<li><strong>What does it log</strong>: Error log page of an SSD</li>
+<li><strong>Is this feature optional?</strong>: No</li>
+<li><strong>Is it relevant for health and error monitoring purposes?</strong>: Yes</li>
+<li><strong>Human interpretable on smartmontools?</strong>: Yes, parsed slightly differently. We can do with smartmontools</li>
+<li><strong>How to retrieve it</strong>:
+<ul>
+<li><code>smartctl -l nvmelog,0x01,0xff /dev/nvme0n1p1</code></li>
+<li><code>nvme error-log /dev/nvme0n1p1</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="commands-supported-and-effects-log">Commands Supported and Effects Log<a class="anchor" href="#commands-supported-and-effects-log">#</a></h3>
+<ul>
+<li><strong>What does it log</strong>:  the commands that the controller supports and the effects of those
+commands on the state of the NVM subsystem</li>
+<li><strong>Is this feature optional?</strong>: No</li>
+<li><strong>Is it relevant for health and error monitoring purposes?</strong>: No</li>
+<li><strong>Human interpretable on smartmontools?</strong>: No</li>
+<li><strong>How to retrieve it</strong>:
+<ul>
+<li><code>smartctl -l nvmelog,0x05,0x1000 /dev/nvme0n1p1</code></li>
+<li><code>nvme effects-log /dev/nvme0n1p1</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="endurance-log">Endurance Log<a class="anchor" href="#endurance-log">#</a></h3>
+<ul>
+<li><strong>What does it log</strong>:  Indicates if an Endurance Group Event has occurred for a particular
+Endurance Group (grouping of one or more NVM Sets: collection of NVM that is separate &ndash;logically and potentially physically&ndash; from NVM in other
+NVM Sets)</li>
+<li><strong>Is this feature optional?</strong>: Yes</li>
+<li><strong>Is it relevant for health and error monitoring purposes?</strong>: No, we can monitor device endurance through SMART log</li>
+<li><strong>Human interpretable on smartmontools?</strong>: No</li>
+<li><strong>How to retrieve it</strong>:
+<ul>
+<li><code>smartctl -l nvmelog,0x09,0xff /dev/nvme0n1p1</code></li>
+<li><code>nvme endurance-log /dev/nvme0n1p1</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="nvme-asymmetric-namespace-access-log">NVMe Asymmetric Namespace Access Log<a class="anchor" href="#nvme-asymmetric-namespace-access-log">#</a></h3>
+<ul>
+<li><strong>What does it log</strong>: NVMe Asymmetric Namespace Access log page</li>
+<li><strong>Is this feature optional?</strong>: Yes</li>
+<li><strong>Is it relevant for health and error monitoring purposes?</strong>: No, not interested in namespaces</li>
+<li><strong>Human interpretable on smartmontools?</strong>: No</li>
+<li><strong>How to retrieve it</strong>:
+<ul>
+<li><code>nvme ana-log /dev/nvme0n1p1</code></li>
+<li><code>smartctl -l nvmelog,0x0c,0xff /dev/nvme0n1p1</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="sanitize-log">Sanitize Log<a class="anchor" href="#sanitize-log">#</a></h3>
+<ul>
+<li><strong>What does it log</strong>: Sanitize operations status</li>
+<li><strong>Is this feature optional?</strong>: Yes</li>
+<li><strong>Is it relevant for health and error monitoring purposes?</strong>: No</li>
+<li><strong>Human interpretable on smartmontools?</strong>: No</li>
+<li><strong>How to retrieve it</strong>:
+<ul>
+<li><code>nvme sanitize-log /dev/nvme0n1p1</code></li>
+<li><code>smartctl -l nvmelog,0x81,0xff /dev/nvme0n1p1</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="self-test-log">Self-test Log<a class="anchor" href="#self-test-log">#</a></h3>
+<ul>
+<li><strong>What does it log</strong>: the self-test operation results</li>
+<li><strong>Is this feature optional?</strong>: No</li>
+<li><strong>Is it relevant for health and error monitoring purposes?</strong>: Yes</li>
+<li><strong>Human interpretable on smartmontools?</strong>: Yes</li>
+<li><strong>How to retrieve it</strong>:
+<ul>
+<li><code>nvme self-test-log /dev/nvme0n1p1</code></li>
+<li><code>smartctl -l selftest /dev/nvme0n1p1</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="changed-namespace-list-log">Changed Namespace List Log<a class="anchor" href="#changed-namespace-list-log">#</a></h3>
+<ul>
+<li><strong>What does it log</strong>:  the NVMe Changed Namespace List log page from an NVMe device</li>
+<li><strong>Is this feature optional?</strong>: No</li>
+<li><strong>Is it relevant for health and error monitoring purposes?</strong>: No</li>
+<li><strong>Human interpretable on smartmontools?</strong>: No</li>
+<li><strong>How to retrieve it</strong>:
+<ul>
+<li><code>nvme changed-ns-list-log /dev/nvme0n1p1</code></li>
+<li><code>smartctl -l nvmelog,0x04,0xff /dev/nvme0n1p1</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="references-and-resources-interesting-reads">References and resources/ Interesting reads<a class="anchor" href="#references-and-resources-interesting-reads">#</a></h2>
+<ul>
+<li>NVMe 1.4 specification <a href="https://nvmexpress.org/wp-content/uploads/NVM-Express-1_4-2019.06.10-Ratified.pdf">https://nvmexpress.org/wp-content/uploads/NVM-Express-1_4-2019.06.10-Ratified.pdf</a></li>
+<li>How SSDs Fail – NVMe™ SSD Management, Error <a href="https://nvmexpress.org/how-ssds-fail-nvme-ssd-management-error-reporting-and-logging-capabilities/">https://nvmexpress.org/how-ssds-fail-nvme-ssd-management-error-reporting-and-logging-capabilities/</a></li>
+<li>Open Source NVMe™ Management Utility – NVMe Command Line Interface (NVMe-CLI): <a href="https://nvmexpress.org/open-source-nvme-management-utility-nvme-command-line-interface-nvme-cli/">https://nvmexpress.org/open-source-nvme-management-utility-nvme-command-line-interface-nvme-cli/</a></li>
+<li>Status of NVMe support on smartmontools <a href="https://www.smartmontools.org/wiki/NVMe_Support">https://www.smartmontools.org/wiki/NVMe_Support</a></li>
+<li>A quick tour of NVMe: <a href="https://metebalci.com/blog/a-quick-tour-of-nvm-express-nvme/">https://metebalci.com/blog/a-quick-tour-of-nvm-express-nvme/</a>.</li>
+<li>NVM Express Specifications -Mastering Today&rsquo;s Architecture and preparing for tomorrow&rsquo;s <a href="https://www.snia.org/sites/default/files/SDC/2019/presentations/NVMe/Metz_J_Adams_Nick_NVM_Express_Specifications_Mastering_Today%E2%80%99s_Architecture_and_Preparing_for_Tomorrows.pdf">https://www.snia.org/sites/default/files/SDC/2019/presentations/NVMe/Metz_J_Adams_Nick_NVM_Express_Specifications_Mastering_Today%E2%80%99s_Architecture_and_Preparing_for_Tomorrows.pdf</a></li>
+<li>NVME tips and tricks (2018): <a href="https://www.nvmedeveloperdays.com/English/Collaterals/Proceedings/2018/20181204_PRECON2_Hands.pdf">https://www.nvmedeveloperdays.com/English/Collaterals/Proceedings/2018/20181204_PRECON2_Hands.pdf</a></li>
+<li>Failure Trends in a Large Disk Drive Population (2007): <a href="http://static.googleusercontent.com/media/research.google.com/en//archive/disk_failures.pdf">http://static.googleusercontent.com/media/research.google.com/en//archive/disk_failures.pdf</a></li>
+<li>Disk Failures in the EOS setup at CERN: <a href="https://www.epj-conferences.org/articles/epjconf/pdf/2019/19/epjconf_chep2018_04046.pdf">https://www.epj-conferences.org/articles/epjconf/pdf/2019/19/epjconf_chep2018_04046.pdf</a></li>
+<li>Flash Reliability in Production - The Expected and the Unexpected (2016): <a href="https://www.usenix.org/system/files/conference/fast16/fast16-papers-schroeder.pdf">https://www.usenix.org/system/files/conference/fast16/fast16-papers-schroeder.pdf</a></li>
+<li>The SSD Anthology: Understanding SSDs and New Drives from OCZ (2009): <a href="https://www.anandtech.com/show/2738">https://www.anandtech.com/show/2738</a></li>
+<li>NVM Express: SCSI Translation Reference: <a href="https://www.nvmexpress.org/wp-content/uploads/NVM-Express-SCSI-Translation-Reference-1_1-Gold.pdf">https://www.nvmexpress.org/wp-content/uploads/NVM-Express-SCSI-Translation-Reference-1_1-Gold.pdf</a></li>
+<li>Performance Analysis of NVMe SSDs and their Implication on Real World Databases: <a href="https://www.cs.utah.edu/~manua/pubs/systor15.pdf">https://www.cs.utah.edu/~manua/pubs/systor15.pdf</a></li>
+<li>NVMe 1.3 Specification Published With New Features For Client And Enterprise SSDs: <a href="https://www.anandtech.com/show/11436/nvme-13-specification-published-new-features">https://www.anandtech.com/show/11436/nvme-13-specification-published-new-features</a></li>
+<li>Implementing and Configuring Modern SANs with NVMe/FC: <a href="https://www.netapp.com/us/media/tr-4684.pdf">https://www.netapp.com/us/media/tr-4684.pdf</a></li>
+</ul>
+
+
+              
+          </article>
+          
+
+ <div class="pagination">
+  
+    <a class="pagination__item" href="http://xvallspl.github.io/blog/cern/root/">
+        <span class="pagination__label">Previous Post</span>
+        <span class="pagination__title">ROOT</span>
+    </a>
+  
+
+  
+    <a class="pagination__item" href="http://xvallspl.github.io/blog/cern/analysischain/">
+      <span class="pagination__label">Next Post</span>
+      <span class="pagination__title" >Physics analysis in the LHC era</a>
+    </a>
+  
+</div>
+
+          
+          <footer class="post__footer">
+            <div class="social-icons">
+    
+    
+    
+    <a class="social-icons__icon social-icons__icon--linkedin"
+        href="https://www.linkedin.com/in/xaviervallspla"></a>
+    
+</div>
+            <p></p>
+          </footer>
+          </div>
+      </div>
+      
+      <div class="toc-container">
+          
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#summary-table">Summary table</a></li>
+        <li><a href="#error-logs-assesment-in-more-detail">Error logs assesment in more detail</a>
+          <ul>
+            <li><a href="#telemetry-log">Telemetry Log</a></li>
+            <li><a href="#firmware-log">Firmware Log</a></li>
+            <li><a href="#smart-log">SMART Log</a></li>
+            <li><a href="#error-log">Error Log</a></li>
+            <li><a href="#commands-supported-and-effects-log">Commands Supported and Effects Log</a></li>
+            <li><a href="#endurance-log">Endurance Log</a></li>
+            <li><a href="#nvme-asymmetric-namespace-access-log">NVMe Asymmetric Namespace Access Log</a></li>
+            <li><a href="#sanitize-log">Sanitize Log</a></li>
+            <li><a href="#self-test-log">Self-test Log</a></li>
+            <li><a href="#changed-namespace-list-log">Changed Namespace List Log</a></li>
+          </ul>
+        </li>
+        <li><a href="#references-and-resources-interesting-reads">References and resources/ Interesting reads</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+      </div>
+      
+    </div>
+    
+
+  </main>
+
+   
+
+  
+  <script src="/js/index.min.49e4d8a384357d9b445b87371863419937ede9fa77737522ffb633073aebfa44.js" integrity="sha256-SeTYo4Q1fZtEW4c3GGNBmTft6fp3c3Ui/7YzBzrr&#43;kQ=" crossorigin="anonymous"></script>
+  
+  
+
+  
+    <script src="/js/table-of-contents.js"></script>
+  
+
+
+</body>
+
+</html>
