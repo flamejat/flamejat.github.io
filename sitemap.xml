@@ -18,32 +18,27 @@
   </url>
   
   <url>
-    <loc>http://xvallspl.github.io/blog/cern/rms/</loc>
-    <lastmod>2020-06-21T09:12:19+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://xvallspl.github.io/tags/cern/</loc>
-    <lastmod>2020-06-12T17:21:44+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://xvallspl.github.io/blog/cern/analysischain/</loc>
-    <lastmod>2020-06-12T17:21:44+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://xvallspl.github.io/tags/</loc>
-    <lastmod>2020-06-12T17:21:44+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://xvallspl.github.io/blog/cern/nvme-cli/</loc>
     <lastmod>2020-05-15T09:12:26+02:00</lastmod>
   </url>
   
   <url>
+    <loc>http://xvallspl.github.io/blog/cern/cuda/</loc>
+    <lastmod>2020-03-21T09:12:26+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://xvallspl.github.io/blog/cern/rms/</loc>
+    <lastmod>2019-12-21T09:12:19+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://xvallspl.github.io/categories/</loc>
+    <lastmod>2019-06-13T09:02:03+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://xvallspl.github.io/tags/cern/</loc>
     <lastmod>2019-06-13T09:02:03+02:00</lastmod>
   </url>
   
@@ -63,8 +58,13 @@
   </url>
   
   <url>
-    <loc>http://xvallspl.github.io/blog/cern/cuda/</loc>
-    <lastmod>2019-03-21T09:12:26+02:00</lastmod>
+    <loc>http://xvallspl.github.io/tags/</loc>
+    <lastmod>2019-06-13T09:02:03+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://xvallspl.github.io/blog/cern/analysischain/</loc>
+    <lastmod>2019-06-12T17:21:44+02:00</lastmod>
   </url>
   
 </urlset>
