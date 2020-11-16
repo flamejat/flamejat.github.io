@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <title>Analysis benchmarks for grid and HPC | Xavier Valls Pla</title>
+
+  <meta charset="UTF-8">
+  <meta name="language" content="en">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  
+  
+
+  <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+
+  
+  
+    
+ 
+  
+  
+  
+  
+  
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/post.min.423aef0742dab2335ffc1d5a5b0232425b83fbb8ff30ab07fa55524587262ef4.css" integrity="sha256-QjrvB0LasjNf/B1aWwIyQluD&#43;7j/MKsH&#43;lVSRYcmLvQ="/>
+  
+    
+    <link type="text/css" rel="stylesheet" href="/css/custom.min.e82b10a78547c055d0865dc60c44d991716134ea551429c086ee814d26150ee1.css" integrity="sha256-6CsQp4VHwFXQhl3GDETZkXFhNOpVFCnAhu6BTSYVDuE="/>
+  
+  
+   
+   
+    
+
+<script type="application/ld+json">
+  
+    {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/xvallspl.github.io\/"
+      },
+      "articleSection" : "blog",
+      "name" : "Analysis benchmarks for grid and HPC",
+      "headline" : "Analysis benchmarks for grid and HPC",
+      "description" : "",
+      "inLanguage" : "en-US",
+      "author" : "",
+      "creator" : "",
+      "publisher": "",
+      "accountablePerson" : "",
+      "copyrightHolder" : "",
+      "copyrightYear" : "2020",
+      "datePublished": "2020-06-17 10:06:55 \u002b0200 CEST",
+      "dateModified" : "2020-06-17 10:06:55 \u002b0200 CEST",
+      "url" : "http:\/\/xvallspl.github.io\/blog\/cern\/analysisbenchmarks\/",
+      "wordCount" : "504",
+      "keywords" : ["Blog"]
+    }
+  
+  </script>
+</head>
+
+<body>
+  <div class="burger__container">
+  <div class="burger" aria-controls="navigation" aria-label="Menu">
+    <div class="burger__meat burger__meat--1"></div>
+    <div class="burger__meat burger__meat--2"></div>
+    <div class="burger__meat burger__meat--3"></div>
+  </div>
+</div>
+ 
+
+  <nav class="nav" id="navigation">
+  <ul class="nav__list">
+    
+    
+      <li>
+        <a  href="/">about</a>
+      </li>
+    
+      <li>
+        <a  class="active"
+         href="/blog">blog</a>
+      </li>
+    
+  </ul>
+</nav>
+
+
+  <main>
+    
+    
+
+    <div class="flex-wrapper">
+      <div class="post__container">
+        <div class="post">
+          <header class="post__header">
+            <h1 id="post__title">Analysis benchmarks for grid and HPC</h1>
+            <time datetime="2020-06-17 10:06:55 &#43;0200 CEST" class="post__date">Jun 17 2020</time> 
+          </header>
+          <article class="post__content">
+              
+<p>Initial description for the <s>Openlab</s> Student project proposed for the summer of 2020 that I supervised.</p>
+<p>To be updated with the student report and probably a paper once they are available.</p>
+<h2 id="project-description">Project description<a class="anchor" href="#project-description">#</a></h2>
+<p>CERN measures the performance of computers based on typical computing
+patterns that happen &ldquo;in real life&rdquo;. One such pattern is analysis. This
+project proposes to extract existing example analyses to create a
+benchmarking utility for computers or HPC systems. This utility can then
+serve to describe a system&rsquo;s performance for running typical analyses.
+Example analyses already exist in the context of the main analysis
+software of high energy physics, ROOT (<a href="https://root.cern">https://root.cern</a>), for instance
+leveraging CERN&rsquo;s open data. The student would convert such analyses
+into a stand-alone program, and make it accessible as a benchmark.</p>
+<h2 id="deliverables">Deliverables<a class="anchor" href="#deliverables">#</a></h2>
+<ul>
+<li>A stand-alone program representative of HEP analysis benchmarks to describe the performance of a particular system.</li>
+<li>A new HEP analysis <a href="https://gitlab.cern.ch/hep-benchmarks/hep-workloads">workload</a> for hepscore</li>
+</ul>
+<h3 id="desiderata">Desiderata<a class="anchor" href="#desiderata">#</a></h3>
+<ul>
+<li>Identify an analysis WL that runs on CPU and on CPU+GPU</li>
+<li>Identify an analysis WL for each of the LHC experiments (or at least for ATLAS and CMS)</li>
+<li>Identify analysis WL for train processing</li>
+</ul>
+<h2 id="where-to-start">Where to start<a class="anchor" href="#where-to-start">#</a></h2>
+<ul>
+<li>Read the resources in the section below</li>
+<li>Meet with co-mentors, openlab HPC (every Tuesday at 14:00) and ROOT&rsquo;s performance team</li>
+<li>Run the different benchmarks available (<a href="https://gitlab.cern.ch/hep-benchmarks/hep-benchmark-suite#how-to-run">how to run</a>) in some of our systems, observe the results, interact with Kibana and its reporting</li>
+<li>Inspect and understand the current code for the <a href="https://gitlab.cern.ch/hep-benchmarks/hep-workloads">benchmarks on the experiment workloads</a></li>
+<li>Gather the candidate benchmarks from ROOT</li>
+<li><a href="https://lh3.googleusercontent.com/LvQuq0-i1qFT5ZLNIx7WlMhiVndHCv3rEU2myBfD2l93lG_Beh5EmXcskTSLHhcYf3lEopXC9HywA_EjG1V9L7l-RClWESPn1NYJq2Mo5GeT7OabIW_hctEyGFbnZJtoYhZ6FK2iNWHhg9dIvAqrNmQcl2XXY_Lrg4qHbGu3hsgYYOW3ElsL2sM68YZOZX5hed7v5wLIFAkJETcI0M2PpaB4cZHgzeRyVCvazj7LH0-spTubNH5vhjoV13CLvf8yKllTsJ40Lm0cpq4gVB1GV4E36xv2aujmlKMaTRDAg57SxIt11JpGAvDE36HZVXQFKo40U9s4EAqgjR7QqaI4DqW84SR6m0gESlhRC6LPV6IcWW8Yu-3pqiyAgeVdZ73ChtF1pJ5erVkctq3Zg_ipXtESreeor_Wrj6KF3J6NjOwdADxtL1gYoprtkUTSV9CGrZ5ismBkX9EQD0ZjB0DcJSgqlyzf9u0Y1OqnffUFJJAjHg3F7pBamoCj1CmGrAiaJbarYPOh573AEB5AJi0735vhyiQrTz2AXR_4FFWj9J0IH1JAJ_OVVuiliZsRtOdXTbSsd7wQKMFa-XKAeErRFKIaOWhgDeJLpZF7QnjZnfAhnB_Sv8nRyH19HsMbmoyjZlS7WVEuzo1wHjhMAOx5Q42jsD0jb6f2ZWch0YlFNhDPeeGgyfRCqF89Lj0Y6w=w530-h453-no">Implement</a> the solution</li>
+</ul>
+<h2 id="resources">Resources<a class="anchor" href="#resources">#</a></h2>
+<h3 id="hep-benchmarks-project">HEP Benchmarks project<a class="anchor" href="#hep-benchmarks-project">#</a></h3>
+<ul>
+<li>HEP Benchmarks for CPUs and beyond: High-Energy Physics workloads as benchmarks of computing architectures. <a href="https://indico.cern.ch/event/908146/contributions/3826766/subcontributions/305948/attachments/2033812/3412612/HSF-WLCG-Workshop-13-05-2020-giordano.pdf">Presentation from Domenico Giordano</a> for the HSF-WLCG Virtual Workshop
+<ul>
+<li>papers
+<ul>
+<li><a href="https://arxiv.org/abs/2004.01609">Using HEP experiment workflows for the benchmarking and accounting of WLCG computing resources</a></li>
+<li><a href="https://www.epj-conferences.org/articles/epjconf/abs/2019/19/epjconf_chep2018_08011/epjconf_chep2018_08011.html">Next Generation of HEP CPU Benchmarks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Benchmarks <a href="https://gitlab.cern.ch/hep-benchmarks">repository</a></li>
+<li>egroup: <a href="mailto:benchmark-suite-wg-devel@cern.ch">benchmark-suite-wg-devel@cern.ch</a></li>
+<li>Jira project: <a href="https://its.cern.ch/jira/projects/BMK/summary">https://its.cern.ch/jira/projects/BMK/summary</a></li>
+<li>Meetings of the Benchmarking WG:
+<ul>
+<li>Friday 14h (general meeting) other Friday (14:30) Sprint Meeting
+<ul>
+<li>check <a href="https://indico.cern.ch/category/1806/">https://indico.cern.ch/category/1806/</a></li>
+</ul>
+</li>
+<li>Tuesday 14:00 coffee zoom</li>
+</ul>
+</li>
+</ul>
+<h3 id="root-project">Root project<a class="anchor" href="#root-project">#</a></h3>
+<ul>
+<li>
+<p>The ROOT <a href="https://root.cern">website</a>, <a href="http://github.com/root-project/">project repository</a>, and <a href="https://mattermost.web.cern.ch/root/">Mattermost</a></p>
+</li>
+<li>
+<p>An <a href="https://xvallspl.github.io/blog/cern/root/">overview of ROOT</a></p>
+</li>
+<li>
+<p>Teleworking Tips &amp; Tricks (CERN): <a href="https://codimd.web.cern.ch/vjC8BHbTS7etHwJve-K2Uw">https://codimd.web.cern.ch/vjC8BHbTS7etHwJve-K2Uw</a></p>
+</li>
+<li>
+<p>Physics Analysis in the LHC era. <a href="https://xvallspl.github.io/blog/cern/analysischain/">Article</a></p>
+</li>
+</ul>
+<h3 id="getting-root">Getting ROOT<a class="anchor" href="#getting-root">#</a></h3>
+<h4 id="sourcing-a-pre-compiled-version-of-root">Sourcing a pre-compiled version of ROOT</h4>
+<p>There are several options when it comes to sourcing ROOT instead of building it or installing it. However, as building it with a specific set of features might be required (e.g. HPX, right now a proof of concept), starting the <a href="https://wiki.gentoo.org/wiki/Project:Prefix">gentoo prefix</a> provided by Guilherme Amadio in <a href="https://cernvm.cern.ch/portal/filesystem">CVMFS</a> will be the preferred option.</p>
+<p>By executing</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">/cvmfs/sft.cern.ch/lcg/contrib/gentoo/startprefix
+</code></pre></div><p>in a machine with access to CVMFS, the user will have available both ROOT and every library required to build it.</p>
+<p>Alternatives:</p>
+<ul>
+<li>Sourcing one of the <a href="http://lcginfo.cern.ch/">LCG software releases</a> from CVMFS. Instructions can be found <a href="http://lcgdocs.web.cern.ch/lcgdocs/lcgreleases/introduction/">here</a>.</li>
+<li>Installing ROOT from your package manager (not recommended)</li>
+<li>Running a <a href="https://hub.docker.com/u/rootproject">docker container</a></li>
+<li>Building and installing ROOT taking care of the dependencies manually</li>
+</ul>
+<h4 id="building-root">Building ROOT</h4>
+<p>Follow the instructions <a href="https://root.cern.ch/building-root">here</a>. You <em>probably</em> want to source the externals from CVMFS (Gentoo prefix or CVMFS releases from the previous section) and build it with <code>ccache=on</code>.</p>
+
+
+              
+          </article>
+          
+
+ <div class="pagination">
+  
+    <a class="pagination__item" href="http://xvallspl.github.io/blog/cern/nvme-cli/">
+        <span class="pagination__label">Previous Post</span>
+        <span class="pagination__title">Evaluating nvme-cli new feature logs and the need to monitor them</span>
+    </a>
+  
+
+  
+    <a class="pagination__item" href="http://xvallspl.github.io/blog/osfc/">
+      <span class="pagination__label">Next Post</span>
+      <span class="pagination__title" >Open Source Firmware Conference 2019 Report</a>
+    </a>
+  
+</div>
+
+          
+          <footer class="post__footer">
+            <div class="social-icons">
+    
+    
+    
+    <a class="social-icons__icon social-icons__icon--linkedin"
+        href="https://www.linkedin.com/in/xaviervallspla"></a>
+    
+</div>
+            <p></p>
+          </footer>
+          </div>
+      </div>
+      
+    </div>
+    
+
+  </main>
+
+   
+
+  
+  <script src="/js/index.min.49e4d8a384357d9b445b87371863419937ede9fa77737522ffb633073aebfa44.js" integrity="sha256-SeTYo4Q1fZtEW4c3GGNBmTft6fp3c3Ui/7YzBzrr&#43;kQ=" crossorigin="anonymous"></script>
+  
+  
+
+  
+
+
+</body>
+
+</html>

@@ -23,6 +23,17 @@ However, I did present about it in a section meeting. These are the supporting s
     </item>
     
     <item>
+      <title>Analysis benchmarks for grid and HPC</title>
+      <link>http://xvallspl.github.io/blog/cern/analysisbenchmarks/</link>
+      <pubDate>Wed, 17 Jun 2020 10:06:55 +0200</pubDate>
+      
+      <guid>http://xvallspl.github.io/blog/cern/analysisbenchmarks/</guid>
+      <description>Initial description for the Openlab Student project proposed for the summer of 2020 that I supervised.
+To be updated with the student report and probably a paper once they are available.
+Project description CERN measures the performance of computers based on typical computing patterns that happen &amp;ldquo;in real life&amp;rdquo;. One such pattern is analysis. This project proposes to extract existing example analyses to create a benchmarking utility for computers or HPC systems.</description>
+    </item>
+    
+    <item>
       <title>Evaluating nvme-cli new feature logs and the need to monitor them</title>
       <link>http://xvallspl.github.io/blog/cern/nvme-cli/</link>
       <pubDate>Fri, 15 May 2020 09:12:26 +0200</pubDate>
